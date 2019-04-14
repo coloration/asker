@@ -1,0 +1,46 @@
+<template>
+<div>1111</div>  
+</template>
+
+<script>
+import Asker from '../src/asker'
+import { 
+  adapterExam1Api, 
+  adapterExam2Api,
+  adapterExam3Api,
+  adapterExam4Api,
+  adapterExam5Api
+} from './adapter'
+
+import { methodApi } from './method'
+
+export default {
+  mounted () {
+
+
+    
+    const log = console.log
+    adapterExam1Api.get('whatever or string').then(log)
+    adapterExam2Api.get('/userinfo', { uid: 1 }).then(log)
+    adapterExam2Api.get('/userinfo1', { uid: 1 }).catch(log)
+    adapterExam3Api.get('a url query userinfo', { uid: 1 }).then(log)
+    adapterExam4Api.get('a url query list', { page: 2, pageSize: 20 }).then(log)
+    adapterExam5Api.get('a url query list', { page: 2, pageSize: 20 }).then(log)
+
+
+    methodApi.get('/comments').then(log)
+    methodApi.get('/comments', { id: 1, foo: 2 }).then(log)
+    methodApi.post('/comment', { id: '1', comment: '我已经出门了' }, { postType: 'form-data' }).then(log)
+    methodApi.post('/comment', { id: '2', comment: '我要化妆啦' }, { postType: 'json', }).then(log)
+    methodApi.post('/comment', { id: '1', comment: '太慢了！' }, { postType: 'form-urlencoded' }).then(log)
+    methodApi.post('/comment', { id: '2', comment: '还好啦！' }).then(log)
+
+    methodApi.put('/testput', { name: 'joe' }, { postType: 'json' }).then(log)
+    methodApi.patch('/testpatch', { name: 'david' }).then(log).then(log)
+  }
+}
+</script>
+
+<style>
+
+</style>
