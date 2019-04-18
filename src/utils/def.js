@@ -3,19 +3,17 @@ export const CONTENT_TYPE = 'Content-Type'
 export const defConf = {
   url: '',
   baseUrl: '',
-  transReq: null,
-  transRes: null,
-  headers: {},
   params: null,
-  adapter: null,
+  headers: {},
   postType: 'json',
   resType: 'json',
   timeout: 0,
   validator: null,
+  transReq: null,
+  transRes: null,
+  adapter: void 0,
   onUploadProgress: null,
   onDownloadProgress: null,
-
-  
 }
 
 export const defRes = {

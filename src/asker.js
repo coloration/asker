@@ -23,6 +23,15 @@ function Asker (conf) {
 
 }
 
+let instance = null
+
+function staticMethodGenerator (method) {
+  Asker[method] = function () {
+    instance = instance || new Asker()
+    return instance[method](...arguments)
+  }
+}
+
 
 function getMethodGenerator (method) {
   Asker.prototype[method] = function (url, params, conf) {
@@ -97,7 +106,7 @@ function ask (conf) {
     conf
   )
   
-  const resPromise = conf.adapter == null ? 
+  const resPromise = isUnd(conf.adapter) ? 
     xhrAdapter(conf) : 
     customAdapter(conf)
 
@@ -115,6 +124,6 @@ Asker.conf = merge({}, defConf)
 
 getMethods.forEach(getMethodGenerator)
 postMethods.forEach(postMethodGenerator)
-
+getMethods.concat(postMethods).forEach(staticMethodGenerator)
 
 export default Asker

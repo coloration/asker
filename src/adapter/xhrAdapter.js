@@ -51,7 +51,7 @@ export default function xhrAdapter (conf) {
       xhr = null
     }
 
-    if (isPositive(conf.timeout)) xhr.timeout = conf.timeout
+    if (isPositive(conf.timeout)) xhr.timeout = conf.timeout * 1000
     const reqHeaders = conf.headers
     xhr.open(conf.method.toUpperCase(), conf._url, true)
 

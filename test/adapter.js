@@ -7,7 +7,6 @@ export const adapterExam1Api = new Asker({
   adapter: [1, 2, 3],
 })
 
-
 export const adapterExam2Api = new Asker({
   baseUrl: '',
   adapter (conf, defRes) {
@@ -73,9 +72,6 @@ export const adapterExam4Api = new Asker({
     return res
   }
 })
-
-
-
 
 export const adapterExam5Api = new Asker({
   adapter: function adapter5 (conf, res) {
