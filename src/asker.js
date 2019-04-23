@@ -8,7 +8,6 @@ const getMethods = ['get', 'delete', 'head', 'options']
 const postMethods = ['post', 'put', 'patch']
 
 function Asker (conf) {
-
   conf = conf || {}
   this._reqQueue = []
   this._resQueue = []
@@ -39,8 +38,8 @@ function getMethodGenerator (method) {
     
     const _conf = merge({}, this.conf, conf, { method, url, params })
     
-    const _reqQueue = [...this._reqQueue]
-    const _resQueue = [...this._resQueue]
+    const _reqQueue = this._reqQueue.slice()
+    const _resQueue = this._resQueue.slice()
     
     isFunc(conf.transReq) && _reqQueue.push(conf.transReq)
     isFunc(conf.transRes) && _resQueue.push(conf.transRes)
@@ -61,8 +60,8 @@ function postMethodGenerator (method) {
     
     const _conf = merge({}, this.conf, conf, { method, url, params })
 
-    const _reqQueue = [...this._reqQueue]
-    const _resQueue = [...this._resQueue]
+    const _reqQueue = this._reqQueue.slice()
+    const _resQueue = this._resQueue.slice()
 
     isFunc(conf.transReq) && _reqQueue.push(conf.transReq)
     isFunc(conf.transRes) && _resQueue.push(conf.transRes)

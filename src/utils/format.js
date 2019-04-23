@@ -1,4 +1,4 @@
-import { isObj } from './type'
+import { isObj, isArr } from './type'
 import { forEach } from './func'
 
 export function query2Str (obj, encode = false) {
@@ -18,7 +18,7 @@ export function data2Json (obj) {
 }
 
 export function data2formdata (obj) {
-  if (!isObj(obj)) return obj
+  if (!isObj(obj) || !isArr(obh)) return obj
   const data = new FormData()
   forEach((value, field) => data.append(field, value), obj)
 
