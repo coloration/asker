@@ -1,15 +1,3 @@
-建个group
-group下新建项目 eg: projectname
-
-```
-$ npm init --scope=yourgroupname
-```
-配置完之后上传上去
-
-```
-$ yarn add git+ssh://git@xxx.com:yourgroupname/projectname.git
-```
-
 # Asker
 
 - [Methods](#Methods)
@@ -20,7 +8,11 @@ $ yarn add git+ssh://git@xxx.com:yourgroupname/projectname.git
 ## install
 
 ``` bash
-$ yarn add git+ssh://git@code.aliyun.com:coloration/asker.git -S
+$ yarn add git+ssh://git@github.com:coloration/asker.git -S
+
+# or 
+
+$ yarn add @coloration/asker
 ```
 
 ## conf 

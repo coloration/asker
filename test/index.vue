@@ -33,7 +33,7 @@ export default {
 
     // methodApi.get('/comments').then(log)
     // methodApi.get('/comments', { id: 1, foo: 2 }).then(log)
-    // methodApi.post('/comment', { id: '1', comment: '我已经出门了' }, { postType: 'form-data' }).then(log)
+    methodApi.post('/comment', { id: '1', comment: '我已经出门了' }, { postType: 'form-data' }).then(log)
     methodApi.post('/comment', { id: '2', comment: '我要化妆啦' }, { postType: 'json', }).then(log)
     methodApi.post('/comment', { id: '1', comment: '太慢了！' }, { postType: 'form-urlencoded' }).then(log)
     methodApi.post('/comment', { id: '2', comment: '还好啦！' }).then(log)
