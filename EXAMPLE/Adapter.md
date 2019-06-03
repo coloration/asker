@@ -98,8 +98,8 @@ adapterExam3Api.get('a url query userinfo', { uid: 1 }).then(console.log)
 import Mock from 'mockjs'
 
 export const adapterExam5Api = new Request({
-  adapter: function adapter5 ({ params }, res) {
-    const { page, pageSize } = params
+  adapter: function adapter5 ({ query }, res) {
+    const { page, pageSize } = query
 
     res.data = Mock.mock({
       page,
@@ -138,8 +138,8 @@ import dream from 'dreamjs'
 const registConstType = (type, value) => dream.customType(type, () => value)
 
 export const adapterExam4Api = new Asker({
-  adapter ({ params }, res) {
-    const { page, pageSize } = params
+  adapter ({ query }, res) {
+    const { page, pageSize } = query
     registConstType('page', page)
     registConstType('pageSize', pageSize)
     dream.customType('itemId', h => h.previousItem ? h.previousItem.id + 1 : (page - 1) * pageSize + 1)

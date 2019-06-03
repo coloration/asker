@@ -41,7 +41,7 @@ const registConstType = (type, value) => dream.customType(type, () => value)
 export const adapterExam4Api = new Asker({
   adapter (conf, res) {
     
-    const { page, pageSize } = conf.params
+    const { page, pageSize } = conf.query
     registConstType('page', page)
     registConstType('pageSize', pageSize)
     dream.customType('itemId', h => h.previousItem ? h.previousItem.id + 1 : (page - 1) * pageSize + 1)
@@ -75,7 +75,7 @@ export const adapterExam4Api = new Asker({
 
 export const adapterExam5Api = new Asker({
   adapter: function adapter5 (conf, res) {
-    const { page, pageSize } = conf.params
+    const { page, pageSize } = conf.query
 
     // res.status = 500
     res.data = Mock.mock({

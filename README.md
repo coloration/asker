@@ -34,7 +34,6 @@ $ yarn add git+ssh://git@code.aliyun.com:coloration/asker.git -S
 type conf = {
   baseUrl: string,              // 基础路径，
   url: string,                  // 具体路径，最终路径为 baseUrl + url
-  params: {} | null,            // 请求参数，get 方法会转化为 queryString。eg: ?foo=1&bar=2
   headers: {},                  // 配置请求头, 会依据上方优先级规则**覆盖**
   postType:                     // 根据此配置对 params 进行处理，默认为 json
     'json' | 'text' | 'form-data' | 'form-urlencoded',         
@@ -139,6 +138,3 @@ adapterExam1Api.get('whatever or string').then(console.log)
 
 
 ---
-
-
-just for freedom

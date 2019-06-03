@@ -56,7 +56,7 @@ export default function xhrAdapter (conf) {
     xhr.open(conf.method.toUpperCase(), conf._url, true)
 
     forEach((header, key) => {
-      if (!conf._data && key.toLowerCase() === 'content-type') {
+      if (!conf.body && key.toLowerCase() === 'content-type') {
         delete reqHeaders[key]
       }
       else {
@@ -69,7 +69,7 @@ export default function xhrAdapter (conf) {
     
     if (isFunc(conf.onUploadProgress) && xhr.upload) 
       xhr.upload.addEventListener('progress', conf.onUploadProgress)
-
-    xhr.send(conf._data)
+    
+    xhr.send(conf.body)
   })
 }

@@ -8,6 +8,11 @@ const getMethods = ['get', 'delete', 'head', 'options']
 const postMethods = ['post', 'put', 'patch']
 
 function Asker (conf) {
+  /// no new
+  if (!(this instanceof Asker)) {
+    return new Asker(conf)
+  }
+
   conf = conf || {}
   this._reqQueue = []
   this._resQueue = []
@@ -33,10 +38,9 @@ function staticMethodGenerator (method) {
 
 
 function getMethodGenerator (method) {
-  Asker.prototype[method] = function (url, params, conf) {
-    conf = isObj(url) ? url : conf || {}
-    
-    const _conf = merge({}, this.conf, conf, { method, url, params })
+  Asker.prototype[method] = function (url, query, conf) {
+    conf = conf || {}
+    const _conf = merge({}, this.conf, conf, { method, url })
     
     const _reqQueue = this._reqQueue.slice()
     const _resQueue = this._resQueue.slice()
@@ -44,10 +48,15 @@ function getMethodGenerator (method) {
     isFunc(conf.transReq) && _reqQueue.push(conf.transReq)
     isFunc(conf.transRes) && _resQueue.push(conf.transRes)
 
-    const _url = _conf.baseUrl + _conf.url + '?' + query2Str(params)
-    const _data = null 
+    let _url = _conf.baseUrl + _conf.url 
+    if (isObj(query)) {
+      _url += '?' + query2Str(query)
+      _conf.query = query
+    }
 
-    Object.assign(_conf, { _reqQueue, _resQueue, _url, _data })
+    const body = _conf.body || null 
+
+    Object.assign(_conf, { _reqQueue, _resQueue, _url, body })
 
     return ask(_conf)
   }
@@ -56,9 +65,8 @@ function getMethodGenerator (method) {
 
 function postMethodGenerator (method) {
   Asker.prototype[method] = function (url, params, conf) {
-    conf = isObj(url) ? url : conf || {}
-    
-    const _conf = merge({}, this.conf, conf, { method, url, params })
+    conf = conf || {}
+    const _conf = merge({}, this.conf, conf, { method, url })
 
     const _reqQueue = this._reqQueue.slice()
     const _resQueue = this._resQueue.slice()
@@ -66,35 +74,38 @@ function postMethodGenerator (method) {
     isFunc(conf.transReq) && _reqQueue.push(conf.transReq)
     isFunc(conf.transRes) && _resQueue.push(conf.transRes)
     
-    const _url = _conf.baseUrl + _conf.url
+    let _url = _conf.baseUrl + _conf.url
 
-    let _data = null
+    if (isObj(_conf.query)) {
+      _url += '?' + query2Str(_conf.query)
+    }
+
+    let body = null
     const headers = _conf.headers
     switch (_conf.postType) {
       case 'form-data':
-        _data = data2formdata(params)
+        body = data2formdata(params)
         delete headers[CONTENT_TYPE]
         break
       
       case 'text':
-        _data = params
+        body = params
         headers[CONTENT_TYPE] = 'text/plain'
         break
 
       case 'form-urlencoded':
-        _data = query2Str(params, true)
+        body = query2Str(params, true)
         headers[CONTENT_TYPE] = 'application/x-www-form-urlencoded'
         break
 
       case 'json':
       default:
-        _data = data2Json(params)
+        body = data2Json(params)
         headers[CONTENT_TYPE] = 'application/json'
         break
     }
-
-    Object.assign(_conf, { _url, _data, _reqQueue, _resQueue })
-
+    
+    Object.assign(_conf, { _url, _reqQueue, _resQueue, body })
     return ask(_conf) 
   }
 }

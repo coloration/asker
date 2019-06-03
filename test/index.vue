@@ -4,13 +4,14 @@
 
 <script>
 import Asker from '../src/asker.js'
-// import { 
-//   adapterExam1Api, 
-//   adapterExam2Api,
-//   adapterExam3Api,
-//   adapterExam4Api,
-//   adapterExam5Api
-// } from './adapter'
+
+import { 
+  adapterExam1Api, 
+  adapterExam2Api,
+  adapterExam3Api,
+  adapterExam4Api,
+  adapterExam5Api
+} from './adapter'
 
 import { methodApi } from './method'
 
@@ -21,7 +22,7 @@ export default {
     
     const log = console.log
 
-    log(Asker.get)
+    // log(Asker.get)
     // adapterExam1Api.get('whatever or string').then(log)
     // adapterExam2Api.get('/userinfo', { uid: 1 }).then(log)
     // adapterExam2Api.get('/userinfo1', { uid: 1 }).catch(log)
@@ -33,12 +34,12 @@ export default {
     // methodApi.get('/comments').then(log)
     // methodApi.get('/comments', { id: 1, foo: 2 }).then(log)
     // methodApi.post('/comment', { id: '1', comment: '我已经出门了' }, { postType: 'form-data' }).then(log)
-    // methodApi.post('/comment', { id: '2', comment: '我要化妆啦' }, { postType: 'json', }).then(log)
-    // methodApi.post('/comment', { id: '1', comment: '太慢了！' }, { postType: 'form-urlencoded' }).then(log)
-    // methodApi.post('/comment', { id: '2', comment: '还好啦！' }).then(log)
+    methodApi.post('/comment', { id: '2', comment: '我要化妆啦' }, { postType: 'json', }).then(log)
+    methodApi.post('/comment', { id: '1', comment: '太慢了！' }, { postType: 'form-urlencoded' }).then(log)
+    methodApi.post('/comment', { id: '2', comment: '还好啦！' }).then(log)
 
-    // methodApi.put('/testput', { name: 'joe' }, { postType: 'json' }).then(log)
-    // methodApi.patch('/testpatch', { name: 'david' }).then(log).then(log)
+    methodApi.put('/testput', { name: 'joe' }, { postType: 'json' }).then(log)
+    methodApi.patch('/testpatch', { name: 'david' }).then(log).then(log)
   }
 }
 </script>

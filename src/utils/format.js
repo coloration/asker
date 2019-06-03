@@ -18,7 +18,7 @@ export function data2Json (obj) {
 }
 
 export function data2formdata (obj) {
-  if (!isObj(obj) || !isArr(obh)) return obj
+  if (!isObj(obj) || !isArr(obj)) return obj
   const data = new FormData()
   forEach((value, field) => data.append(field, value), obj)
 
