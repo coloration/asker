@@ -12,7 +12,7 @@ $ yarn add git+ssh://git@github.com:coloration/asker.git -S
 
 # or 
 
-$ yarn add @coloration/asker
+$ yarn add @coloration/asker -S
 ```
 
 ## conf 

@@ -24,7 +24,7 @@ export default function jsonpAdapter (conf, defRes) {
 
       resolve(response)
       delete window[callbackName]
-      // document.body.removeChild(scriptDom)
+      document.body.removeChild(scriptDom)
     }
 
 
