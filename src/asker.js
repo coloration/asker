@@ -1,8 +1,9 @@
 import { isFunc, isObj, isUnd } from './utils/type'
 import { merge }  from './utils/helper'
 import { query2Str, data2Json, data2formdata } from './utils/format'
-import { customAdapter, xhrAdapter } from './adapter'
+import { customAdapter, xhrAdapter, jsonpAdapter } from './adapter'
 import { ABORT, ERROR, TIMEOUT, defConf, CONTENT_TYPE } from './utils/def'
+import {} from './adapter'
 
 const getMethods = ['get', 'delete', 'head', 'options']
 const postMethods = ['post', 'put', 'patch']
@@ -134,6 +135,12 @@ Asker.conf = merge({}, defConf)
 
 getMethods.forEach(getMethodGenerator)
 postMethods.forEach(postMethodGenerator)
-getMethods.concat(postMethods).forEach(staticMethodGenerator)
+getMethods.concat(postMethods).concat('jsonp').forEach(staticMethodGenerator)
+
+Asker.prototype.jsonp = function (url, query, conf) {
+  conf.adapter = jsonpAdapter
+  return this.get(url, query, conf)
+}
+
 
 export default Asker

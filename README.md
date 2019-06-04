@@ -78,6 +78,8 @@ exampleApi.post('/query-something', { param1: 'a', param2: 2 })
 // body: { param1: 'a', param2: 2 }
 
 Asker.get('https://foo.bar.com', {})
+
+Asker.jsonp('https://foo.bar.com', yourQueryOrNull, { jsonp: jsonpField })
 ```
 
 `'get' | 'delete' | 'head' | 'options'` 执行 getLike 方法，

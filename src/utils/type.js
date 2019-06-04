@@ -25,3 +25,7 @@ export function isUnd (obj) {
 export function isArr (obj) {
   return Array.isArray(obj)
 }
+
+export function isStr (obj) {
+  return typeof obj === 'string'
+}

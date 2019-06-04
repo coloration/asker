@@ -10,13 +10,18 @@ export default function customAdapter (conf) {
       adapter(conf, defaultResponse) : 
       merge(defaultResponse, { data: adapter, request: null })
 
-    const valid = isFunc(conf.validator) ? 
-      conf.validator(res.status) :
-      res.status >= 200 && res.status < 300
+    let resPromise = res instanceof Promise ? res : Promise.resolve(res)
+
+    resPromise.then(function (res) {
+      const valid = isFunc(conf.validator) ? 
+        conf.validator(res.status) :
+        res.status >= 200 && res.status < 300
+      
+      valid ? resolve(res) : reject({ 
+        message: `adapter return status: ${res.status}`,
+        status: res.status
+      })
+    }) 
     
-    valid ? resolve(res) : reject({ 
-      message: `adapter return status: ${res.status}`,
-      status: res.status
-    })
   })
 }
