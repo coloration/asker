@@ -3,7 +3,9 @@ import { merge }  from './utils/helper'
 import { query2Str, data2Json, data2formdata } from './utils/format'
 import { customAdapter, xhrAdapter, jsonpAdapter } from './adapter'
 import { ABORT, ERROR, TIMEOUT, defConf, CONTENT_TYPE } from './utils/def'
-import {} from './adapter'
+import * as util from './utils/public'
+import batch from './batch'
+
 
 const getMethods = ['get', 'delete', 'head', 'options']
 const postMethods = ['post', 'put', 'patch']
@@ -127,20 +129,26 @@ function ask (conf) {
       res
     )
   })
-  
+
 }
+
+
+Asker.prototype.jsonp = function jsonp (url, query, conf) {
+  
+  conf.adapter = jsonpAdapter
+
+  return this.get(url, query, conf)
+}
+
+Asker.prototype.batch = batch
 
 Asker.type = { ABORT, ERROR, TIMEOUT }
 Asker.conf = merge({}, defConf)
+Asker.util = util
 
 getMethods.forEach(getMethodGenerator)
 postMethods.forEach(postMethodGenerator)
-getMethods.concat(postMethods).concat('jsonp').forEach(staticMethodGenerator)
-
-Asker.prototype.jsonp = function (url, query, conf) {
-  conf.adapter = jsonpAdapter
-  return this.get(url, query, conf)
-}
+getMethods.concat(postMethods).concat(['jsonp', 'batch']).forEach(staticMethodGenerator)
 
 
 export default Asker

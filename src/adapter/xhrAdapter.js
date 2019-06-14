@@ -4,10 +4,10 @@ import { merge } from '../utils/helper'
 import { defRes, getResHeaders, ABORT, ERROR, TIMEOUT } from '../utils/def' 
 
 export default function xhrAdapter (conf) {
-  return new Promise((resolve, reject) => {
+  return new Promise(function promiseCreator (resolve, reject) {
     let xhr = new XMLHttpRequest()
     
-    xhr.onreadystatechange = function () {
+    xhr.onreadystatechange = function handleStateChange () {
       if (!xhr || xhr.readyState !== 4) return
       
       const valid = isFunc(conf.validator) ? 
@@ -33,19 +33,19 @@ export default function xhrAdapter (conf) {
       resolve(res)
     }
 
-    xhr.onabort = function () {
+    xhr.onabort = function handleAbort () {
       if (!xhr) return 
       isFunc(conf.onAbort) ? conf.onAbort(ABORT) : reject(ABORT)
       xhr = null
     }
 
-    xhr.onerror = function () {
+    xhr.onerror = function handleError () {
       if (!xhr) return 
       isFunc(conf.onError) ? conf.onError(ERROR) : reject(ERROR)
       xhr = null
     }
 
-    xhr.ontimeout = function () {
+    xhr.ontimeout = function handleTimeout () {
       if (!xhr) return 
       isFunc(conf.onTimeout) ? conf.onTimeout(TIMEOUT) : reject(TIMEOUT)
       xhr = null
@@ -55,7 +55,7 @@ export default function xhrAdapter (conf) {
     const reqHeaders = conf.headers
     xhr.open(conf.method.toUpperCase(), conf._url, true)
 
-    forEach((header, key) => {
+    forEach(function formatHeader (header, key) {
       if (!conf.body && key.toLowerCase() === 'content-type') {
         delete reqHeaders[key]
       }
@@ -65,10 +65,14 @@ export default function xhrAdapter (conf) {
     }, reqHeaders)
 
     if (isFunc(conf.onDownloadProgress)) 
-      xhr.onprogress = conf.onDownloadProgress
+      xhr.onprogress = function progress (e) {
+        conf.onDownloadProgress(e)
+      }
     
     if (isFunc(conf.onUploadProgress) && xhr.upload) 
-      xhr.upload.addEventListener('progress', conf.onUploadProgress)
+      xhr.upload.addEventListener('progress', function (progressEvent) {
+        conf.onUploadProgress(progressEvent, xhr, conf)
+      })
     
     xhr.send(conf.body)
   })

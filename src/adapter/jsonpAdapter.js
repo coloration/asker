@@ -1,9 +1,9 @@
 export default function jsonpAdapter (conf, defRes) {
-  return new Promise(function (resolve, reject) {
+
+  return new Promise(function promiseCreator (resolve, reject) {
 
     const callbackName = 'asker_jsonp' + new Date().getTime()
     const jsonpQuery = `${conf.jsonp}=${callbackName}`
-
     let url = conf._url
 
     const hasQuery = conf._url.split('?').length > 1
@@ -13,7 +13,7 @@ export default function jsonpAdapter (conf, defRes) {
     const scriptDom = document.createElement('script')
     scriptDom.src = url
     
-    window[callbackName] = function (resData) {
+    window[callbackName] = function jsonpCallback (resData) {
       const response = Object.assign({}, defRes, {
         data: resData,
         status: 200,
@@ -27,9 +27,7 @@ export default function jsonpAdapter (conf, defRes) {
       document.body.removeChild(scriptDom)
     }
 
-
     document.body.appendChild(scriptDom)
-
 
   })
 }

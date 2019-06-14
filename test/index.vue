@@ -1,10 +1,12 @@
 <template>
-<div>1111</div>  
+<div>
+  <Upload />  
+</div>  
 </template>
 
 <script>
 import Asker from '../src/asker.js'
-
+import Upload from './upload.vue'
 import { 
   adapterExam1Api, 
   adapterExam2Api,
@@ -16,6 +18,7 @@ import {
 import { methodApi } from './method'
 
 export default {
+  components: { Upload },
   mounted () {
 
 
