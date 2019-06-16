@@ -1,31 +1,34 @@
 <template>
 <div>
-  <Upload />  
+  1111
+  <!-- <Upload />   -->
 </div>  
 </template>
 
 <script>
-import Asker from '../src/asker.js'
-import Upload from './upload.vue'
-import { 
-  adapterExam1Api, 
-  adapterExam2Api,
-  adapterExam3Api,
-  adapterExam4Api,
-  adapterExam5Api
-} from './adapter'
+// import Asker from '../src/asker.js'
+import Asker from '../lib'
 
-import { methodApi } from './method'
+// import Upload from './upload.vue'
+// import { 
+//   adapterExam1Api, 
+//   adapterExam2Api,
+//   adapterExam3Api,
+//   adapterExam4Api,
+//   adapterExam5Api
+// } from './adapter'
+
+// import { methodApi } from './method'
 
 export default {
-  components: { Upload },
+  // components: { Upload },
   mounted () {
 
-
-    // Asker.jsonp('http://assistant.yingshe.com/index/taohuayun', undefined, { jsonp: 'jsoncallback' })
-    // .then(data => {
-    //   console.log(data, 6666)
-    // })
+    console.log(2222222, Asker)
+    Asker.jsonp('http://assistant.yingshe.com/index/taohuayun', undefined, { jsonp: 'jsoncallback' })
+    .then(data => {
+      console.log(data, 6666)
+    })
 
     // window.asker_jsonp666 = function (data) {
     //   console.log('2222', data)

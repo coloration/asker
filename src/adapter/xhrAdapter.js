@@ -35,19 +35,19 @@ export default function xhrAdapter (conf) {
 
     xhr.onabort = function handleAbort () {
       if (!xhr) return 
-      isFunc(conf.onAbort) ? conf.onAbort(ABORT) : reject(ABORT)
+      isFunc(conf.onAbort) ? conf.onAbort.call(null, ABORT, xhr) : reject(ABORT)
       xhr = null
     }
 
     xhr.onerror = function handleError () {
       if (!xhr) return 
-      isFunc(conf.onError) ? conf.onError(ERROR) : reject(ERROR)
+      isFunc(conf.onError) ? conf.onError.call(null, ERROR, xhr) : reject(ERROR)
       xhr = null
     }
 
     xhr.ontimeout = function handleTimeout () {
       if (!xhr) return 
-      isFunc(conf.onTimeout) ? conf.onTimeout(TIMEOUT) : reject(TIMEOUT)
+      isFunc(conf.onTimeout) ? conf.onTimeout.call(null, TIMEOUT, xhr) : reject(TIMEOUT)
       xhr = null
     }
 
@@ -65,13 +65,14 @@ export default function xhrAdapter (conf) {
     }, reqHeaders)
 
     if (isFunc(conf.onDownloadProgress)) 
-      xhr.onprogress = function progress (e) {
-        conf.onDownloadProgress(e)
-      }
+      xhr.addEventListener('progress', function progress (progressEvent) {
+        conf.onDownloadProgress.call(null, progressEvent, xhr, conf)
+      })
     
+    // batch will need conf to calc the load / total
     if (isFunc(conf.onUploadProgress) && xhr.upload) 
       xhr.upload.addEventListener('progress', function (progressEvent) {
-        conf.onUploadProgress(progressEvent, xhr, conf)
+        conf.onUploadProgress.call(null, progressEvent, xhr, conf)
       })
     
     xhr.send(conf.body)
