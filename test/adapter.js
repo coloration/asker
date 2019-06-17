@@ -1,4 +1,4 @@
-import Asker from '../src/asker'
+import Asker from '../src/index'
 import dream from 'dreamjs'
 import Mock from 'mockjs'
 

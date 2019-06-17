@@ -1,7 +1,6 @@
-import { forEach } from '../utils/func'
-import { isFunc, isPositive } from '../utils/type'
-import { merge } from '../utils/helper'
-import { defRes, getResHeaders, ABORT, ERROR, TIMEOUT } from '../utils/def' 
+import { forEach, isFunc, isPositive } from '../util/func'
+import { merge, getResHeaders } from '../util/format'
+import { defRes, ABORT, ERROR, TIMEOUT } from '../util/def' 
 
 export default function xhrAdapter (conf) {
   return new Promise(function promiseCreator (resolve, reject) {
@@ -21,7 +20,7 @@ export default function xhrAdapter (conf) {
 
       const headers = getResHeaders(xhr)
       const res = merge({}, defRes, {
-        data: conf.resType === 'text' ? xhr.responseText : JSON.parse(xhr.responseText),
+        data: conf.responseType === 'text' ? xhr.responseText : JSON.parse(xhr.responseText),
         status: xhr.status,
         statusText: xhr.statusText,
         headers,
@@ -51,9 +50,9 @@ export default function xhrAdapter (conf) {
       xhr = null
     }
 
-    if (isPositive(conf.timeout)) xhr.timeout = conf.timeout * 1000
+    if (isPositive(conf.timeout)) xhr.timeout = conf.timeout
     const reqHeaders = conf.headers
-    xhr.open(conf.method.toUpperCase(), conf._url, true)
+    xhr.open(conf.method.toUpperCase(), conf.uri, true)
 
     forEach(function formatHeader (header, key) {
       if (!conf.body && key.toLowerCase() === 'content-type') {

@@ -1,6 +1,6 @@
-import { merge } from '../utils/helper'
-import { defRes } from '../utils/def'
-import { isFunc } from '../utils/type'
+import { merge } from '../util/format'
+import { defRes } from '../util/def'
+import { isFunc } from '../util/func'
 
 export default function customAdapter (conf) {
 

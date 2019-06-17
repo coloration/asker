@@ -4,14 +4,14 @@ export default function jsonpAdapter (conf, defRes) {
 
     const callbackName = 'asker_jsonp' + new Date().getTime()
     const jsonpQuery = `${conf.jsonp}=${callbackName}`
-    let url = conf._url
+    let uri = conf.uri
 
-    const hasQuery = conf._url.split('?').length > 1
+    const hasQuery = uri.split('?').length > 1
 
-    url += hasQuery ? '&' : '?' + jsonpQuery
+    uri += (hasQuery ? '&' : '?') + jsonpQuery
 
     const scriptDom = document.createElement('script')
-    scriptDom.src = url
+    scriptDom.src = uri
     
     window[callbackName] = function jsonpCallback (resData) {
       const response = Object.assign({}, defRes, {
@@ -19,7 +19,7 @@ export default function jsonpAdapter (conf, defRes) {
         status: 200,
         statusText: 'jsonp',
         conf,
-        request: url
+        request: uri
       })
 
       resolve(response)
