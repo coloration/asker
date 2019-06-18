@@ -19,6 +19,7 @@ export const defConf = {
   // onAbort: undefined,
   // onUploadProgress: undefined,
   // onDownloadProgress: undefined,
+  // withCredentials: undefined
 }
 
 export const defRes = {

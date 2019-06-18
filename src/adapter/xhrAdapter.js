@@ -51,6 +51,9 @@ export default function xhrAdapter (conf) {
     }
 
     if (isPositive(conf.timeout)) xhr.timeout = conf.timeout
+
+    if (conf.withCredentials) xhr.withCredentials = true
+
     const reqHeaders = conf.headers
     xhr.open(conf.method.toUpperCase(), conf.uri, true)
 
@@ -62,6 +65,8 @@ export default function xhrAdapter (conf) {
         xhr.setRequestHeader(key, header)
       }
     }, reqHeaders)
+
+
 
     if (isFunc(conf.onDownloadProgress)) 
       xhr.addEventListener('progress', function progress (progressEvent) {

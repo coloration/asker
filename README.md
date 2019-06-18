@@ -21,37 +21,76 @@ $ yarn add @coloration/asker -S
 
 优先级: 方法传入的 conf > asker 实例的 conf > Asker.conf
 
-``` ts
-// conf
-type conf = {
-  baseUrl: string,              // 基础路径，
-  url: string,                  // 具体路径，最终路径为 baseUrl + url
-  headers: {},                  // 配置请求头, 会依据上方优先级规则**覆盖**
-  postType:                     // 根据此配置对 params 进行处理，默认为 json
-    'json' | 'text' | 'form-data' | 'form-urlencoded',         
-  transReq: conf => conf,       // 在发起请求req前执行，
-                                // 执行顺序为 Asker.conf.transReq, asker.conf.transReq, [method](conf.transReq)
-  transRes: res => res,         // 在得到相应res后执行，
-                                // 执行顺序为 Asker.conf.transRes, asker.conf.transRes, [method](conf.transRes)
 
-  validator: status => boolean, // 代替默认的校验，默认为 status >= 200 && status < 300        
-  adapter:                      // 代替实际发送的请求，对请求进行模拟，
-                                // 如果返回非函数值，则该值会被填充进 Response.data 中
-                                // 如果返回函数值，需要手动填充，以保证一致性，第二个参数是默认的 Response 结构
-    null | string | number | Array | {} | (conf, defaultRes) => res,              
-                              
-  resType: 'json' | 'text',     // 操作 responseText，默认为 json，即对其进行 JSON.parse 操作，
-                                // 当设置 adapter时，此配置不生效
-  timeout: 0,                   // 设置超时时间单位为秒(s)，
-                                // 超时后执行 conf.onTimeout(Asker.type.TIMEOUT)
-                                // 如果不存在则会调用 reject(Asker.type.TIMEOUT)
-  onTimeout: Asker.type => ()   // 超时回调函数，此方法会依据上方优先级规则**覆盖**
-  onError: Asker.type => ()     // 错误回调，此方法会依据上方优先级规则**覆盖**，
-                                // 如果没配置此字段会执行 reject(Asker.type.ERROR)
-  onAbort: Asker.type => ()     // 中断回调，此方法会依据上方优先级规则**覆盖**，
-                                // 如果没配置此字段会执行 reject(Asker.type.ABORT)                                
-  onUploadProgress: Function,   // 上传进度回调  
-  onDownloadProgress: Function, // 下载进度回调
+基本配置如下, 
+
+``` ts
+
+export interface AskerConf {
+  /** a sub url, it will be added after `baseUrl` at last */
+  url?: string,
+  
+  /** the url first part */
+  baseUrl?: string,
+  
+  /** the string result */
+  query?: string,
+  
+  /** the transferred object for post  */
+  body?: any,
+  
+  /** if you need to set the query string when you call the post like methods, you could set this  */
+  params?: { [key: string]: any },
+  
+  method?: 'get' | 'option' | 'head' | 'post' | 'put' | 'patch' | 'delete',
+  
+  /** request headers */
+  headers?: { [key: string]: any }
+  
+  /** asker will change the data type auto by this */
+  postType?: 'json' | 'form-data' | 'text' | 'form-urlencoded',
+  
+  /** default 'object' will call 'JSON.parse()', other return string */
+  responseType?: 'object' | 'string',
+  
+  /** waiting over timeout, asker will call the 'onTimeout' or 'reject' */
+  timeout?: 0,
+
+  /** custom validator, default is `status >= 200 && status < 300` */
+  validator?: (status: number) => boolean,
+
+  /** custom adapter: you can replace default xhr adapter, `Asker.jsonp` is implemented by this way。
+   * it also can be used in mock, you can pass a data (except `undefined`), it will return a response 
+   * wrapped by `AskerResponse` object. Or you pass a function return a custom data
+  */
+  adapter?: string | number | boolean | { [key: string]: any } | any[] |
+    ((response: any, defaultResponse: AskerResponse) => Promise<any>) | 
+    (<T>(response: T, defaultResponse: AskerResponse) => Promise<T>)
+  ,
+  
+  /** hook chain change the `AskerConf` before the request  */
+  before?: (conf: AskerConf) => AskerConf | ((conf: AskerConf) => AskerConf)[],
+  
+  /** hook chain change your resopnse after the request */
+  after?: (response: any) => any
+
+  /** called when xhr trigger `error` event */
+  onError?: (errType: string, xhr: XMLHttpRequest, conf: AskerConf) => any,
+
+  /** called when xhr trigger `abort` event */
+  onAbort?: (errType: string, xhr: XMLHttpRequest, conf: AskerConf) => any,
+
+  /** called when xhr trigger `timeout` event */
+  onTimeout?: (errType: string, xhr: XMLHttpRequest, conf: AskerConf) => any,
+
+  /** called when xhr trigger `upload.progress` event */
+  onUploadProgress?: (e: ProgressEvent, xhr: XMLHttpRequest, conf: AskerConf) => any,
+  
+  /** called when xhr trigger `progress` event */
+  onDownloadProgress?: (e: ProgressEvent, xhr: XMLHttpRequest, conf: AskerConf) => any
+
+  /** other props */
+  [key: string]: any
 }
 
 ```
@@ -94,8 +133,8 @@ Asker.jsonp('https://foo.bar.com', yourQueryOrNull, { jsonp: jsonpField })
 import Asker from '@coloration/asker'
 
 const someApi = new Asker({
-  transRes: ({ data }) => data,
-  transReq: conf => {
+  after: ({ data }) => data,
+  before: conf => {
     conf.headers.Auth = yourAuth
     return conf
   }

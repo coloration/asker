@@ -1,5 +1,7 @@
 export default function batch (url, params, conf) {
 
+  params = Array.isArray(params) ? params : [params] 
+
   const _this = this
 
   const method = conf.method || 'get'

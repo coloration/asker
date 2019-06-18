@@ -38,7 +38,7 @@ getMethods.concat(postMethods).concat(['jsonp', 'batch']).forEach(staticMethodGe
 Asker.prototype.jsonp = jsonp
 Asker.prototype.batch = batch
 
-Asker.type = { ABORT, ERROR, TIMEOUT }
+Asker.errorType = { ABORT, ERROR, TIMEOUT }
 Asker.conf = mergeConf({}, defConf)
 
 
