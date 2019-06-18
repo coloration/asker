@@ -11,7 +11,6 @@ function staticMethodGenerator (method) {
   
   Asker[method] = function () {
     instance = instance || new Asker()
-    console.log(method, instance)
     return instance[method](...arguments)
   }
 }
