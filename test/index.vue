@@ -7,7 +7,7 @@
 
 <script>
 // import Asker from '../src/asker.js'
-import Asker from '../src/index'
+import Asker, { safeCall } from '../src/index'
 
 import Upload from './upload.vue'
 import { 
@@ -24,21 +24,38 @@ export default {
   components: { Upload },
   mounted () {
 
+
+
     // Asker.conf.before = (conf) => {
     //   console.log('before')
     //   conf.headers.test = conf.headers.test ? conf.headers.test + 1 : 1
     
     //   return conf
     // }
-    Asker.conf.after = (res) => {
-      console.log(12, res)
-      return res.data
-    }
+    // Asker.conf.after = (res) => {
+    //   console.log(12, res)
+    //   return res.data
+    // }
 
-    Asker.jsonp('http://assistant.yingshe.com/index/taohuayun', undefined, { jsonp: 'jsoncallback' })
-    .then(data => {
-      console.log(data, 6666)
-    })
+    // Asker.jsonp('http://assistant.yingshe.com/index/taohuayun', undefined, { jsonp: 'jsoncallback' })
+    // .then(data => {
+    //   console.log(data, 6666)
+    // })
+
+
+    // const safe = safeCall(function (e) {
+    //   console.log(e)
+    // })
+
+    // const a = safe((h) => {
+      
+    //   return Promise.resolve('right')
+    // })
+    // .then(res => {
+    //   console.log('safeCall', res)
+    // })
+
+    // console.log('a', a)
 
 
     
@@ -58,13 +75,13 @@ export default {
     // document.body.appendChild(scriptDom)
 
 
-    methodApi.conf.after = (res) => {
-      return res.data
-    }
+    // methodApi.conf.after = (res) => {
+    //   return res.data
+    // }
 
-    methodApi.conf.before = (conf) => {
-      return conf
-    }
+    // methodApi.conf.before = (conf) => {
+    //   return conf
+    // }
     
     const log = console.log
 
@@ -77,15 +94,15 @@ export default {
     // adapterExam5Api.get('a url query list', { page: 2, pageSize: 20 }).then(log)
 
 
-    methodApi.get('/comments').then(log)
-    methodApi.get('/comments', { id: 1, foo: 2 }).then(log)
-    methodApi.post('/comment', { id: '1', comment: '我已经出门了' }, { postType: 'form-data' }).then(log)
-    methodApi.post('/comment', { id: '2', comment: '我要化妆啦' }, { postType: 'json', }).then(log)
-    methodApi.post('/comment', { id: '1', comment: '太慢了！' }, { postType: 'form-urlencoded' }).then(log)
-    methodApi.post('/comment', { id: '2', comment: '还好啦！' }).then(log)
+    // methodApi.get('/comments').then(log)
+    // methodApi.get('/comments', { id: 1, foo: 2 }).then(log)
+    // methodApi.post('/comment', { id: '1', comment: '我已经出门了' }, { postType: 'form-data' }).then(log)
+    // methodApi.post('/comment', { id: '2', comment: '我要化妆啦' }, { postType: 'json', }).then(log)
+    // methodApi.post('/comment', { id: '1', comment: '太慢了！' }, { postType: 'form-urlencoded' }).then(log)
+    // methodApi.post('/comment', { id: '2', comment: '还好啦！' }).then(log)
 
-    methodApi.put('/testput', { name: 'joe' }, { postType: 'json' }).then(log)
-    methodApi.patch('/testpatch', { name: 'david' }).then(log).then(log)
+    // methodApi.put('/testput', { name: 'joe' }, { postType: 'json' }).then(log)
+    // methodApi.patch('/testpatch', { name: 'david' }).then(log).then(log)
   }
 }
 </script>

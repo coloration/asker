@@ -37,7 +37,7 @@ export function safeCall (exceptHandler) {
       scopeReturn = scopeFunction(exceptHandler)
 
       if (scopeReturn instanceof Promise) {
-        scopeReturn.catch(exceptHandler)
+        scopeReturn = scopeReturn.catch(exceptHandler)
       }
     }
     catch (e) {

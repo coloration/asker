@@ -168,4 +168,4 @@ declare class Asker {
 export default Asker
 
 export function splitBlob (fileOrblob: Blob, piece: number): Blob[]
-export function safeCall (exceptionHandler: (e: any) => any): (exceptionHandler: (e: any) => any) => any
+export function safeCall (exceptionHandler: (e: any) => any): (exceptionHandler?: (e: any) => any) => any

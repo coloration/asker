@@ -1,5 +1,12 @@
 # ChangeLog
 
+## 0.5.2
+
+*2019-06-20*
+
+### Optimization
+- safe (safeCall return function) will return a Promise when you return a Promise in its scope
+
 ## 0.5.1
 
 *2019-06-18*
