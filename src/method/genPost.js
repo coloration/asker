@@ -1,46 +1,49 @@
 import { CONTENT_TYPE } from '../util/def'
-import { mergeConf, object2formdata, object2Query, object2Json } from '../util/format'
+import { mergeQueue, merge, object2formdata, object2Query, object2Json } from '../util/format'
 import request from './request'
 
 export default function postGen (method) {
   return function postLike (url, body, conf) {
 
-    conf = mergeConf(this.conf, conf)
-    conf.method = method
-    conf.url = url
+    const queueMap = mergeQueue(this.conf, conf)
+    let _conf = merge({}, this.conf, conf)
+    _conf = Object.assign(_conf, queueMap)
+
+    _conf.method = method
+    _conf.url = url
 
     if (body) {
-      const headers = conf.headers || {}
+      const headers = _conf.headers || {}
       let _body = null
 
-      switch (conf.postType) {
+      switch (_conf.postType) {
         
-        case PostType.formData:
+        case 'form-data':
           _body = object2formdata(body)
           delete headers[CONTENT_TYPE]
           break
         
-        case PostType.text:
+        case 'text':
           _body = body
           headers[CONTENT_TYPE] = 'text/plain'
           break
         
-        case PostType.formUrlencoded:
+        case 'form-urlencoded':
           _body = object2Query(body, true)
           headers[CONTENT_TYPE] = 'application/x-www-form-urlencoded'
           break
         
-        case PostType.json:
+        case 'json':
         default:
           _body = object2Json(body)
           headers[CONTENT_TYPE] = 'application/json'
           break
       }
 
-      conf.body = _body
+      _conf.body = _body
     }
 
 
-    return request(conf)
+    return request(_conf)
   }
 }

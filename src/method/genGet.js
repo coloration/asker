@@ -1,14 +1,20 @@
-import { mergeConf } from '../util/format'
+import { mergeQueue, merge } from '../util/format'
 import request from './request'
 
 export default function genGetMethod (method) {
   return function getLike (url, params, conf) {
     
-    conf = mergeConf(this.conf, conf)
-    conf.method = method
-    conf.url = url
-    conf.params = params
+    const queueMap = mergeQueue(this.conf, conf)
+    
+    
 
-    return request(conf)
+    let _conf = merge({}, this.conf, conf)
+    _conf = Object.assign(_conf, queueMap)
+    
+    _conf.method = method
+    _conf.url = url
+    _conf.params = params
+
+    return request(_conf)
   }
 }

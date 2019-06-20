@@ -3,7 +3,11 @@ import { object2Query } from '../util/format'
 import { customAdapter, xhrAdapter } from '../adapter'
 
 export default function request (conf) {
-  let uri = conf.baseUrl + conf.url
+
+  const baseUrl = conf.baseUrl || ''
+  const url = conf.url || ''
+
+  let uri = baseUrl + url
 
   if (isObj(conf.params)) {
     conf.query = object2Query(conf.params)
@@ -12,16 +16,16 @@ export default function request (conf) {
 
   conf.uri = uri
 
-  const before = conf.before
+  const before = conf.beforeQueue
 
-  conf = before.reduce(function (formatConf, transfer) {
+  const _conf = before.reduce(function (formatConf, transfer) {
     return transfer(formatConf)
   }, conf)
 
-  const adapter = isUnd(conf.adapter) ? xhrAdapter: customAdapter
+  const adapter = isUnd(_conf.adapter) ? xhrAdapter: customAdapter
 
-  return adapter(conf).then(function (res) {
-    const after = conf.after
+  return adapter(_conf).then(function (res) {
+    const after = _conf.afterQueue
 
     return after.reduce(function (formatRes, transfer) {
       return transfer(formatRes)

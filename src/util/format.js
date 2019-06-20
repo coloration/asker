@@ -25,10 +25,10 @@ export function object2formdata (obj) {
   return data
 }
 
-export function merge (o, ...args) {
-  o = isIter(o) ? o : {}
+export function merge (...args) {
 
   const objArgs = args.filter(arg => isIter(arg))
+  const o = objArgs.shift()
 
   objArgs.reduce((o, arg) => {
     if (!isIter(arg)) throw TypeError(`merge a ${arg} to object`)
@@ -36,15 +36,17 @@ export function merge (o, ...args) {
     forEach(function handlePair (val, key) {
       
       const curr = o[key]
-      
-      if (isObj(val)) 
+
+      if (isObj(val)) {
         o[key] = merge(isObj(curr) ? curr : {}, val)
-      
-      else if (isArr(val)) 
+      }
+      else if (isArr(val)) {
         o[key] = merge(isArr(curr) ? curr : [], val)
-      
-      else 
+      }
+      else {
         o[key] = val
+      }
+        
 
     }, arg)
   
@@ -56,19 +58,26 @@ export function merge (o, ...args) {
 }
 
 
-export function mergeConf (conf1, conf2 = {}) {
-  const before = 
-    [].concat(conf1.before).concat(conf2.before).filter(isFunc)
-
-  const after = 
-    [].concat(conf1.after).concat(conf1.after).filter(isFunc)
-
-  const newConf = merge({}, conf1, conf2)
+export function mergeQueue () {
   
-  newConf.before = before
-  newConf.after = after
+  let beforeQueue = []
+  let afterQueue = []
+
+  const confs = Array.from(arguments).filter(conf => conf)
+
+  confs.forEach(conf => {
+    const b = conf.before
+    const a = conf.after
+    if (isFunc(b) || isArr(b)) {
+      beforeQueue = beforeQueue.concat(b)
+    }
+
+    if (isFunc(a) || isArr(a)) {
+      afterQueue = afterQueue.concat(a)
+    }
+  })
   
-  return newConf
+  return { beforeQueue, afterQueue }
 }
 
 const ignoreDuplicateOf = [

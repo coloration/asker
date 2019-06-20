@@ -1,9 +1,13 @@
+function toString (obj) {
+  return Object.prototype.toString.call(obj)
+}
+
 export function isFunc (any) {
   return typeof any == 'function'
 }
 
-export function isObj (any) {
-  return any != null && typeof any == 'object'
+export function isObj (obj) {
+  return toString(obj) === '[object Object]'
 }
 
 export function isNum (any) {

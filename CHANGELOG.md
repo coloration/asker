@@ -1,5 +1,13 @@
 # ChangeLog
 
+## 0.5.1
+
+*2019-06-18*
+
+### Fix
+- after/before merge repeated
+- merge will change array to object
+
 ## 0.5.0
 
 *2019-06-18*
