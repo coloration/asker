@@ -40,7 +40,7 @@ export interface AskerConf {
   postType?: 'json' | 'form-data' | 'text' | 'form-urlencoded',
   
   /** default 'object' will call 'JSON.parse()', other return string */
-  responseType?: 'object' | 'string',
+  responseType?: 'object' | 'text',
   
   /** waiting over timeout(MS), asker will call the 'onTimeout' or 'reject' */
   timeout?: number,
@@ -131,6 +131,8 @@ declare class Asker {
   static delete(url?: string, body?: any, conf?: AskerConf): Promise<any>
   static delete<T>(url?: string, body?: any, conf?: AskerConf): Promise<T>
   
+  static jsonp(url?: string, callName?: string, conf?: AskerJsonpConf): Promise<any>
+  static jsonp<T>(url?: string, callName?: string, conf?: AskerJsonpConf): Promise<T>
   static jsonp(url?: string, body?: any, conf?: AskerJsonpConf): Promise<any>
   static jsonp<T>(url?: string, body?: any, conf?: AskerJsonpConf): Promise<T>
 
@@ -158,7 +160,8 @@ declare class Asker {
   /** JSONP implemented by ScriptDOM */
   jsonp(url?: string, body?: any, conf?: AskerJsonpConf): Promise<any>
   jsonp<T>(url?: string, body?: any, conf?: AskerJsonpConf): Promise<T>
-
+  jsonp(url?: string, callName?: string, conf?: AskerJsonpConf): Promise<any>
+  jsonp<T>(url?: string, callName?: string, conf?: AskerJsonpConf): Promise<T>
   /**  */
   batch(url?: string, paramsOrbody?: any[], conf?: AskerBatchConf): Promise<any>
   batch<T>(url?: string, paramsOrbody?: any[], conf?: AskerBatchConf): Promise<T>

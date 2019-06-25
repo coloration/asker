@@ -37,10 +37,10 @@ export default {
     //   return res.data
     // }
 
-    // Asker.jsonp('http://assistant.yingshe.com/index/taohuayun', undefined, { jsonp: 'jsoncallback' })
-    // .then(data => {
-    //   console.log(data, 6666)
-    // })
+    Asker.jsonp('http://assistant.yingshe.com/index/taohuayun', { a: 1 }, { jsonp: 'jsoncallback' })
+    .then(data => {
+      console.log(data, 6666)
+    })
 
 
     // const safe = safeCall(function (e) {

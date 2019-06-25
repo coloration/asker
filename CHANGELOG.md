@@ -1,5 +1,15 @@
 # ChangeLog
 
+## 0.5.3
+
+*2019-06-25*
+
+### Optimization
+- jsonp can pass callback name to 2nd. parameter `Asker.jsonp('url', 'jsonpcallback')`
+
+### Fix
+- `Conf.responseType` : `object | string` to `object | text`
+
 ## 0.5.2
 
 *2019-06-20*
