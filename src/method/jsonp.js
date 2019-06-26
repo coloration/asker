@@ -9,6 +9,9 @@ export default function jsonp (url, query, conf) {
     query = undefined
   }
 
+  // for conf.getCache
+  conf.method = 'get'
+  
   conf.adapter = jsonpAdapter
   return this.get(url, query, conf)
 }

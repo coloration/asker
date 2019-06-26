@@ -37,9 +37,21 @@ export default {
     //   return res.data
     // }
 
-    Asker.jsonp('http://assistant.yingshe.com/index/taohuayun', { a: 1 }, { jsonp: 'jsoncallback' })
+    Asker.jsonp(
+      'http://assistant.yingshe.com/index/taohuayun', 
+      { a: 1 }, 
+      { jsonp: 'jsoncallback', getCache: true }
+    )
     .then(data => {
       console.log(data, 6666)
+      Asker.jsonp(
+        'http://assistant.yingshe.com/index/taohuayun', 
+        { a: 1 }, 
+        { jsonp: 'jsoncallback', getCache: true }
+      )
+      .then(data => {
+        console.log(data, 777)
+      })
     })
 
 

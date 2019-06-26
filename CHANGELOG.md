@@ -1,5 +1,13 @@
 # ChangeLog
 
+## 0.6.0
+
+*2019-06-26*
+
+### New Feature
+
+- `conf.getCache = true` will cache the response when invoke the getLike(`get`, `option`, `head`) and `jsonp`。we can get the store with `Asker.cache`，Asker save it use the uri (baseUrl + query) as key
+
 ## 0.5.3
 
 *2019-06-25*

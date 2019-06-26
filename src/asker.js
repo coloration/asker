@@ -1,5 +1,7 @@
 import { mergeQueue, merge }  from './util/format'
 import { ABORT, ERROR, TIMEOUT, defConf } from './util/def'
+import cache from './cache'
+
 
 function Asker (conf) {
   /// no new
@@ -15,5 +17,6 @@ function Asker (conf) {
 
 Asker.errorType = { ABORT, ERROR, TIMEOUT }
 Asker.conf = merge({}, defConf)
+Asker.cache = cache
 
 export default Asker

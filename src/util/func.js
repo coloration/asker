@@ -60,3 +60,11 @@ export function forEach (fn, object) {
     }
   }
 }
+
+export function hasProp (o, prop) {
+  return Object.prototype.hasOwnProperty.call(o, prop)
+}
+
+export function isGetLike (method) {
+  return ['get', 'option', 'head'].includes(method)
+}

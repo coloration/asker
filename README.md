@@ -19,8 +19,7 @@ $ yarn add @coloration/asker -S
 
 可以在 `Asker.conf`, `new Asker(conf)`, `asker.conf`, `asker[method](url, params, conf)` 四处设置。
 
-优先级: 方法传入的 conf > asker 实例的 conf > Asker.conf
-
+优先级: 方法传入的 conf > asker 实例的 conf > Asker.conf, 注意：除了`before`, `after`会进入调用栈，其他的配置项均覆盖上层配置
 
 基本配置如下, 
 
@@ -42,19 +41,26 @@ export interface AskerConf {
   /** if you need to set the query string when you call the post like methods, you could set this  */
   params?: { [key: string]: any },
   
+  /** request method, will be override when you invoke instance[method] */
   method?: 'get' | 'option' | 'head' | 'post' | 'put' | 'patch' | 'delete',
   
   /** request headers */
   headers?: { [key: string]: any }
-  
+
+  /** will cache response after first (getLike) request, second will return the cache */
+  getCache?: boolean
+
   /** asker will change the data type auto by this */
   postType?: 'json' | 'form-data' | 'text' | 'form-urlencoded',
   
   /** default 'object' will call 'JSON.parse()', other return string */
-  responseType?: 'object' | 'string',
+  responseType?: 'object' | 'text',
   
-  /** waiting over timeout, asker will call the 'onTimeout' or 'reject' */
-  timeout?: 0,
+  /** waiting over timeout(MS), asker will call the 'onTimeout' or 'reject' */
+  timeout?: number,
+
+  /** set `XMLHTTPRequest` withCredentials */
+  withCredentials?: true,
 
   /** custom validator, default is `status >= 200 && status < 300` */
   validator?: (status: number) => boolean,
@@ -89,7 +95,7 @@ export interface AskerConf {
   /** called when xhr trigger `progress` event */
   onDownloadProgress?: (e: ProgressEvent, xhr: XMLHttpRequest, conf: AskerConf) => any
 
-  /** other props */
+  /** other custom props */
   [key: string]: any
 }
 

@@ -31,11 +31,15 @@ export interface AskerConf {
   /** if you need to set the query string when you call the post like methods, you could set this  */
   params?: { [key: string]: any },
   
+  /** request method, will be override when you invoke instance[method] */
   method?: 'get' | 'option' | 'head' | 'post' | 'put' | 'patch' | 'delete',
   
   /** request headers */
   headers?: { [key: string]: any }
-  
+
+  /** will cache response after first (getLike) request, second will return the cache */
+  getCache?: boolean
+
   /** asker will change the data type auto by this */
   postType?: 'json' | 'form-data' | 'text' | 'form-urlencoded',
   
@@ -81,7 +85,7 @@ export interface AskerConf {
   /** called when xhr trigger `progress` event */
   onDownloadProgress?: (e: ProgressEvent, xhr: XMLHttpRequest, conf: AskerConf) => any
 
-  /** other props */
+  /** other custom props */
   [key: string]: any
 }
 
@@ -106,7 +110,9 @@ declare class Asker {
     ERROR: string, 
     TIMEOUT: string
   }
+
   static conf: AskerConf
+  static cache: { [key: string]: any }
 
   conf: AskerConf
 
@@ -162,7 +168,7 @@ declare class Asker {
   jsonp<T>(url?: string, body?: any, conf?: AskerJsonpConf): Promise<T>
   jsonp(url?: string, callName?: string, conf?: AskerJsonpConf): Promise<any>
   jsonp<T>(url?: string, callName?: string, conf?: AskerJsonpConf): Promise<T>
-  /**  */
+  
   batch(url?: string, paramsOrbody?: any[], conf?: AskerBatchConf): Promise<any>
   batch<T>(url?: string, paramsOrbody?: any[], conf?: AskerBatchConf): Promise<T>
 
