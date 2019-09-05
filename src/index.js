@@ -29,3 +29,4 @@ Asker.prototype.batch = batch
 
 export default Asker
 export { splitBlob, safeCall }
+export { object2Query } from './util/format'

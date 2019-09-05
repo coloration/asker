@@ -1,5 +1,13 @@
 # ChangeLog
 
+## 0.6.1
+
+*2019-09-05*
+
+### New Feature
+
+- export the `objectToQuery` format function
+
 ## 0.6.0
 
 *2019-06-26*
