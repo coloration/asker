@@ -1,5 +1,13 @@
 # ChangeLog
 
+## 0.6.2
+
+*2019-09-05*
+
+### Update
+
+- update `objectToQuery` type
+
 ## 0.6.1
 
 *2019-09-05*

@@ -178,3 +178,4 @@ export default Asker
 
 export function splitBlob (fileOrblob: Blob, piece: number): Blob[]
 export function safeCall (exceptionHandler: (e: any) => any): (exceptionHandler?: (e: any) => any) => any
+export function object2Query (obj: { [key: string]: any }, encode?: boolean): string
