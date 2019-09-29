@@ -6,15 +6,15 @@ module.exports = {
   mode: 'production',
 
   // devtool: 'inline-source-map',
-  // module: {
-  //   rules: [
-  //     {
-  //       test: /\.tsx?$/,
-  //       use: 'ts-loader',
-  //       exclude: /(node_modules|test)/
-  //     }
-  //   ]
-  // },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: 'babel-loader',
+        exclude: /(node_modules|test)/
+      }
+    ]
+  },
   // resolve: {
   //   extensions: [ '.ts' ]
   // },
