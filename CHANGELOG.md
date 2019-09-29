@@ -1,5 +1,11 @@
 # ChangeLog
 
+*2019-09-29*
+
+### Optimization
+
+- transform code to es5
+
 ## 0.6.2
 
 *2019-09-05*
