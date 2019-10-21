@@ -1,5 +1,4 @@
 import Asker from './asker'
-import { splitBlob, safeCall } from './public'
 import { batch, jsonp, genGet, genPost } from './method' 
 
 const getMethods = ['get', 'delete', 'head', 'options']
@@ -28,5 +27,5 @@ Asker.prototype.batch = batch
 
 
 export default Asker
-export { splitBlob, safeCall }
+export { splitBlob, safeCall } from './public'
 export { object2Query } from './util/format'

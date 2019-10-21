@@ -1,5 +1,13 @@
 # ChangeLog
 
+## 0.6.4
+
+*2019-09-29*
+
+### Optimization
+
+- delete unuseful code
+
 ## 0.6.3
 
 *2019-09-29*

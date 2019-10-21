@@ -7,7 +7,7 @@
 
 <script>
 // import Asker from '../src/asker.js'
-import Asker, { safeCall } from '../src/index'
+import Asker, { safeCall, splitBlob } from '../src/index'
 
 import Upload from './upload.vue'
 import { 
@@ -94,8 +94,13 @@ export default {
     // methodApi.conf.before = (conf) => {
     //   return conf
     // }
+
+    
     
     const log = console.log
+
+    // log(safeCall)
+    // log(splitBlob)
 
     // log(Asker.get)
     // adapterExam1Api.get('whatever or string').then(log)
