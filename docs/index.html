@@ -32,24 +32,37 @@ body { color: #474747; }
 .mgb-40 { margin-bottom: 40px;}
 
 .code-box {
-  overflow-x: scroll;
+  overflow-x: auto;
   padding: 10px 6px;
   margin: 0 -6px 10px;
   background-color:rgba(70, 130, 180, .1);
 }
 
 #toc {
-  position: fixed;
-  padding: 16px 0 0 20px;
+  margin: 20px 0;
+}
 
-}
 #toc li {
-  width: 200px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
   color: #999;
+  height: 30px;
+  line-height: 30px;
+  position: relative;
 }
+
+#toc li::before {
+  content: "";
+  position: absolute;
+  font-size: 100px;
+  width: 0.06em;
+  height: 0.06em;
+  margin-top: -0.03em;
+  color: steelblue;
+  background-color: currentColor;
+  left: -14px;
+  top: 50%;
+  border-radius: 50%;
+}
+
 #toc a {
   color: #999;
 }
@@ -88,9 +101,24 @@ p {
   /* text-align: justify; */
 }
 
+footer {
+  background: #666;
+  height: 200px;
+  color: #f0f0f0;
+  padding: 20px 0;
+  font-size: .9em;
+}
+
+footer a {
+  color: #f0f0f0;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
 </style>
 <body>
-<header>
+<header id="header">
   <h1 class="light-color text-center">Asker</h1>
   <p class="light-color text-center desc mgb-40">
     <em>a simple RESTful request tool for client</em>
@@ -114,9 +142,9 @@ Asker.get('http://api.io/list', { page: 1, size: 20 })
     </code>
   </div>
 </header>
-<ul id="toc"></ul>
-<section class="container">
 
+<section class="container">
+<ul id="toc"></ul>
 <h2 id="instance">Instance</h2>
 <p>You can <code>new</code> a object to cache some configure</p>
 <div class="code-box">
@@ -124,7 +152,7 @@ Asker.get('http://api.io/list', { page: 1, size: 20 })
 import Asker from '@coloration/asker'
 
 const api = new Asker({
-  baseUrl: 'http://api.server.io'
+  baseUrl: 'http://api.io'
 })
 
 api.get('/list', { page: 1, size: 20 })
@@ -217,9 +245,9 @@ export interface AskerConf {
   <code><pre>
 import Asker from '@coloration/asker'
 
-Asker.get('http://api.server.io', { page: 1, size: 20 })
+Asker.get('http://api.io', { page: 1, size: 20 })
 Asker.post(
-  'http:/api.server.io/article', 
+  'http:/api.io/article', 
   { content: 'write ...'},
   { 
     query: 'title=article' 
@@ -248,7 +276,7 @@ Asker.post(
 <div class="code-box">
   <code><pre>
 Asker.jsonp(
-  'http://api.server.io/jsonp', 
+  'http://api.io/jsonp', 
   { page: 1, size: 20 }, 
   { jsonp: 'jsoncallback' }
 )
@@ -258,7 +286,7 @@ Asker.jsonp(
 <div class="code-box">
   <code><pre>
 Asker.batch(
-  'http://api.server.io/upload', 
+  'http://api.io/upload', 
   // an array or a normal param
   [{ file: file1 }, { file: file2 }], 
   { 
@@ -302,9 +330,9 @@ Asker.get('whatever string', whateverParam, {
 }</pre></code>
 </div>
 <h2 id="cache">Cache responses for Getlike methods</h2>
-<p>when you special <code>getCache : true</code>，Asker hold the response in 
+<p>When we special <code>getCache : true</code>，Asker hold the response in 
 <code>Asker.cache</code> object with the url and query until you reload the browser.</p>
-<p>when you request with the same url, params and <code>getCache</code> configure field,
+<p>When we request with the same url, params and <code>getCache</code> configure field,
 Asker will find from the <code>Asker.cache</code> firstly. Inexsitly, will request.</p>
 <div class="code-box">
   <code><pre>
@@ -315,18 +343,62 @@ Asker.get('http://api.io/config', { type: 1 }, { getCache: true })
 // request
 Asker.get('http://api.io/config', { type: 2 }, { getCache: true }) </pre></code>
 </div>
-<h2 id="pipe">Pipe</h2>
 <h2 id="post-type">Post Type</h2>
+<p>Asker will transform the body type when you set the <code>postType</code> field. Default is <code>json</code></p>
+<div class="code-box">
+  <code><pre>
+Asker.post(
+  'http://api.io/upload', 
+  { file: file, name: 'photoname' },
+  { postType: 'form-data' }
+)
+.then(res => {})</pre></code>
+</div>
+<h2 id="timeout">Timeout</h2>
+<h2 id="upload-download-progress">Upload & Download Progress</h2>
+<h2 id="auth-with-before">Auth with before</h2>
+<h2 id="format-with-after">Format with after</h2>
+
+
 </section>
 
 <footer>
-
+  <div class="container">
+    <p>Author: wangbinyu / 406279919@qq.com</p>
+    <p>Github: <a href="https://github.com/coloration/asker">https://github.com/coloration/asker</a></p>
+  </div>
 </footer>
 </body>
 <script>
+function debounce (fn, time) {
+  var timer
+  var _this = this
+
+  return function () {
+    var _arg = arguments
+    clearTimeout(timer)
+    timer = setTimeout(function () {
+      fn.apply(_this, _arg)
+    }, time)
+  }
+}
+
+function throttle (fn, time) {
+  var hasRun = false
+  var _this = this
+  return function () {
+    if (hasRun) return
+    fn.apply(_this, arguments)
+    hasRun = true
+    setTimeout(function () {
+      hasRun = false
+    }, time)
+  }
+}
+
 var tocDom = document.getElementById('toc')
 var h2Doms = document.getElementsByTagName('h2')
-console.log(tocDom)
+
 for (var i = 0; i < h2Doms.length; i++) {
   var h2Dom = h2Doms[i]
   var liDom = document.createElement('li')
@@ -334,6 +406,9 @@ for (var i = 0; i < h2Doms.length; i++) {
   
   tocDom.appendChild(liDom)
 }
+
+
+
 
 </script>
 </html>

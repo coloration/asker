@@ -1,9 +1,6 @@
 # Asker
 
-- [Methods](#Methods)
-- [Transform](#Transform)
-- [Adapter](#Adapter)
-
+[document: http://asker.coloration.top](http://asker.coloration.top)
 
 ## install
 
@@ -100,80 +97,4 @@ export interface AskerConf {
 }
 
 ```
-
-
-## use
-
-<h3 id="Methods">Methods</h3>
-
-``` js
-import Asker from '@coloration/asker'
-
-const exampleApi = new Asker({ 
-  baseUrl: 'https://foo.bar.com' 
-})
-
-exampleApi.get('/query-something', { param1: 'a', param2: 2 })
-
-// https://foo.bar.com/query-something?param1=a&param2=2
-
-exampleApi.post('/query-something', { param1: 'a', param2: 2 })
-
-// https://foo.bar.com/query-something
-// body: { param1: 'a', param2: 2 }
-
-Asker.get('https://foo.bar.com', {})
-
-Asker.jsonp('https://foo.bar.com', yourQueryOrNull, { jsonp: jsonpField })
-```
-
-`'get' | 'delete' | 'head' | 'options'` 执行 getLike 方法，
-`'post' | 'put' | 'patch'` 执行 postLike 方法
-
---- 
-
-
-<h3 id="Transform">Transform</h3>
-
-``` js
-import Asker from '@coloration/asker'
-
-const someApi = new Asker({
-  after: ({ data }) => data,
-  before: conf => {
-    conf.headers.Auth = yourAuth
-    return conf
-  }
-})
-
-```
-
----
-
-<h3 id="Adapter">Adapter</h3>
-
-**example1**: adapter 如果不为函数（也不能设置为 undefined），则直接填充到 response.data 中
-
-``` js
-adapterExam1Api = new Asker({ baseUrl: '', adapter: [1, 2, 3] })
-
-adapterExam1Api.get('whatever or string').then(console.log)
-
-/**
- * { 
- *   data: [1, 2, 3], 
- *   status: 200, 
- *   statusText: 'you skip request and success always', 
- *   headers: {}, 
- *   options: {}, 
- *   request: null 
- * }
-**/
-```
-
-
-- [More Adapter Examples](./EXAMPLE/Adapter)
-
-
-
 ---
