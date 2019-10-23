@@ -125,6 +125,9 @@ declare class Asker {
   static head(url?: string, params?: any, conf?: AskerConf): Promise<any>
   static head<T>(url?: string, params?: any, conf?: AskerConf): Promise<T>
   
+  static delete(url?: string, params?: any, conf?: AskerConf): Promise<any>
+  static delete<T>(url?: string, params?: any, conf?: AskerConf): Promise<T>
+
   static post(url?: string, body?: any, conf?: AskerConf): Promise<any>
   static post<T>(url?: string, body?: any, conf?: AskerConf): Promise<T>
 
@@ -133,9 +136,6 @@ declare class Asker {
 
   static patch(url?: string, body?: any, conf?: AskerConf): Promise<any>
   static patch<T>(url?: string, body?: any, conf?: AskerConf): Promise<T>
-
-  static delete(url?: string, body?: any, conf?: AskerConf): Promise<any>
-  static delete<T>(url?: string, body?: any, conf?: AskerConf): Promise<T>
   
   static jsonp(url?: string, callName?: string, conf?: AskerJsonpConf): Promise<any>
   static jsonp<T>(url?: string, callName?: string, conf?: AskerJsonpConf): Promise<T>
@@ -154,6 +154,9 @@ declare class Asker {
   head(url?: string, params?: any, conf?: AskerConf): Promise<any>
   head<T>(url?: string, params?: any, conf?: AskerConf): Promise<T>
   
+  delete(url?: string, params?: any, conf?: AskerConf): Promise<any>
+  delete<T>(url?: string, params?: any, conf?: AskerConf): Promise<T>
+ 
   post(url?: string, body?: any, conf?: AskerConf): Promise<any>
   post<T>(url?: string, body?: any, conf?: AskerConf): Promise<T>
 

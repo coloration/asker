@@ -1,5 +1,13 @@
 # ChangeLog
 
+## 0.6.5
+
+*2019-09-29*
+
+### Fix
+
+- add `delete` instance method into `d.ts` 
+
 ## 0.6.4
 
 *2019-09-29*
