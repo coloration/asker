@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Coloration Asker</title>
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/mono-blue.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
 </head>
 <style>
 * { margin: 0; padding: 0; text-decoration: none; list-style: none; }
@@ -35,7 +38,7 @@ body { color: #474747; }
   overflow-x: auto;
   padding: 10px 6px;
   margin: 0 -6px 10px;
-  background-color:rgba(70, 130, 180, .1);
+  background-color:#eaeef3;
 }
 
 #toc {
@@ -148,8 +151,7 @@ Asker.get('http://api.io/list', { page: 1, size: 20 })
 <h2 id="instance">Instance</h2>
 <p>You can <code>new</code> a object to cache some configure</p>
 <div class="code-box">
-  <code><pre>
-import Asker from '@coloration/asker'
+  <pre><code class="javascript">import Asker from '@coloration/asker'
 
 const api = new Asker({
   baseUrl: 'http://api.io'
@@ -157,13 +159,12 @@ const api = new Asker({
 
 api.get('/list', { page: 1, size: 20 })
 api.post('/article', { title: 'a article', content: 'write ...' })
-</pre></code>
+</code></pre>
 </div>
 
 <p>Below is a detail configure for Asker, there are some example for configure after this: </p>
 <div class="code-box">
-  <code><pre>
-export interface AskerConf {
+<pre><code class="javascript">export interface AskerConf {
   /** a sub url, it will be added after `baseUrl` at last */
   url?: string,
   
@@ -235,15 +236,14 @@ export interface AskerConf {
 
   /** other custom props */
   [key: string]: any
-}</pre></code>
+}</code></pre>
 </div>
 
 
 <h2 id="methods">Methods</h2>
 <h3 id="methods-normal">Normal</h3>
 <div class="code-box">
-  <code><pre>
-import Asker from '@coloration/asker'
+<pre><code class="javascript">import Asker from '@coloration/asker'
 
 Asker.get('http://api.io', { page: 1, size: 20 })
 Asker.post(
@@ -254,7 +254,7 @@ Asker.post(
     // or
     params: { title: 'article' }
   }
-)</pre></code>
+)</code></pre>
 </div>
 <p>all methods: </p>
 <p>
@@ -274,8 +274,7 @@ Asker.post(
 <p>the <code>jsonp</code> field get from backend developer or document of the origin server.</p>
 <p><span class="Note"></span> jsonp is a outdate way to handle the across origin.</p>
 <div class="code-box">
-  <code><pre>
-Asker.jsonp(
+<pre><code class="javascript">Asker.jsonp(
   'http://api.io/jsonp', 
   { page: 1, size: 20 }, 
   { jsonp: 'jsoncallback' }
@@ -298,7 +297,7 @@ Asker.batch(
   }
 )
 // apply the Promise.all for these requests
-.then(allResponses => {})</pre></code>
+.then(allResponses => {})</code></pre>
 </div>
 <h3 id="methods-custom-mock">Custom & Mock</h3>
 <p>
@@ -307,27 +306,25 @@ Asker.batch(
   its enviorment support JavaScript, but not support XMLHTTPRequest.
 </p>
 <div class="code-box">
-  <code><pre>
-export function get (url, params, conf) {
+<pre><code class="javascript">export function get (url, params, conf) {
   return Asker.get(url, params, Object.assign(conf, {
     adapter (conf) {
       // ...
       return wx.http(/* ... */)
     }
   }))
-}</pre></code>
+}</code></pre>
 </div>
 <p>
   You are mocking when you return a data in the adapter function instead of the promise. 
   You could also pass a normal data to <code>adapter</code>.
 </p>
 <div class="code-box">
-  <code><pre>
-Asker.get('whatever string', whateverParam, {
+<pre><code class="javascript">Asker.get('whatever string', whateverParam, {
   adapter: [1, 2, 3]
 })
 .then(response => {}) // [1, 2, 3]
-}</pre></code>
+}</code></pre>
 </div>
 <h2 id="cache">Cache responses for Getlike methods</h2>
 <p>When we special <code>getCache : true</code>，Asker hold the response in 
@@ -335,24 +332,22 @@ Asker.get('whatever string', whateverParam, {
 <p>When we request with the same url, params and <code>getCache</code> configure field,
 Asker will find from the <code>Asker.cache</code> firstly. Inexsitly, will request.</p>
 <div class="code-box">
-  <code><pre>
-// request
+<pre><code class="javascript">// request
 Asker.get('http://api.io/config', { type: 1 }, { getCache: true }) 
 // find response from cache
 Asker.get('http://api.io/config', { type: 1 }, { getCache: true }) 
 // request
-Asker.get('http://api.io/config', { type: 2 }, { getCache: true }) </pre></code>
+Asker.get('http://api.io/config', { type: 2 }, { getCache: true }) </code></pre>
 </div>
 <h2 id="post-type">Post Type</h2>
 <p>Asker will transform the body type when you set the <code>postType</code> field. Default is <code>json</code></p>
 <div class="code-box">
-  <code><pre>
-Asker.post(
+<pre><code class="javascript">Asker.post(
   'http://api.io/upload', 
   { file: file, name: 'photoname' },
   { postType: 'form-data' }
 )
-.then(res => {})</pre></code>
+.then(res => {})</code></pre>
 </div>
 <h2 id="timeout">Timeout</h2>
 <h2 id="upload-download-progress">Upload & Download Progress</h2>
@@ -370,6 +365,11 @@ Asker.post(
 </footer>
 </body>
 <script>
+document.addEventListener('DOMContentLoaded', (event) => {
+document.querySelectorAll('pre code').forEach((block) => {
+  hljs.highlightBlock(block);
+});
+})
 function debounce (fn, time) {
   var timer
   var _this = this
