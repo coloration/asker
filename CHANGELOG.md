@@ -1,5 +1,12 @@
 # ChangeLog
 
+## 0.6.6
+
+### New Feature
+
+- export `query2Object(query: string, raw:boolean = false)` function. 
+  if spec the `raw: true`. the function will call `JSON.parse` with the string after `=`
+
 ## 0.6.5
 
 *2019-09-29*

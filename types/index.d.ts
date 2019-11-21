@@ -116,64 +116,35 @@ declare class Asker {
 
   conf: AskerConf
 
-  static get(url?: string, params?: any, conf?: AskerConf): Promise<any>
-  static get<T>(url?: string, params?: any, conf?: AskerConf): Promise<T>
+  static get<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<T>
+  static option<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<T>
+  static head<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<T>
+  static delete<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<T>
 
-  static option(url?: string, params?: any, conf?: AskerConf): Promise<any>
-  static option<T>(url?: string, params?: any, conf?: AskerConf): Promise<T>
-
-  static head(url?: string, params?: any, conf?: AskerConf): Promise<any>
-  static head<T>(url?: string, params?: any, conf?: AskerConf): Promise<T>
+  static post<T = any>(url?: string, body?: any, conf?: AskerConf): Promise<T>
+  static put<T = any>(url?: string, body?: any, conf?: AskerConf): Promise<T>
+  static patch<T = any>(url?: string, body?: any, conf?: AskerConf): Promise<T>
   
-  static delete(url?: string, params?: any, conf?: AskerConf): Promise<any>
-  static delete<T>(url?: string, params?: any, conf?: AskerConf): Promise<T>
+  static jsonp<T = any>(url?: string, callName?: string, conf?: AskerJsonpConf): Promise<T>
+  static jsonp<T = any>(url?: string, body?: any, conf?: AskerJsonpConf): Promise<T>
 
-  static post(url?: string, body?: any, conf?: AskerConf): Promise<any>
-  static post<T>(url?: string, body?: any, conf?: AskerConf): Promise<T>
-
-  static put(url?: string, body?: any, conf?: AskerConf): Promise<any>
-  static put<T>(url?: string, body?: any, conf?: AskerConf): Promise<T>
-
-  static patch(url?: string, body?: any, conf?: AskerConf): Promise<any>
-  static patch<T>(url?: string, body?: any, conf?: AskerConf): Promise<T>
+  static batch<T = any>(url?: string, paramsOrbody?: any[], conf?: AskerBatchConf): Promise<T>
   
-  static jsonp(url?: string, callName?: string, conf?: AskerJsonpConf): Promise<any>
-  static jsonp<T>(url?: string, callName?: string, conf?: AskerJsonpConf): Promise<T>
-  static jsonp(url?: string, body?: any, conf?: AskerJsonpConf): Promise<any>
-  static jsonp<T>(url?: string, body?: any, conf?: AskerJsonpConf): Promise<T>
-
-  static batch(url?: string, paramsOrbody?: any[], conf?: AskerBatchConf): Promise<any>
-  static batch<T>(url?: string, paramsOrbody?: any[], conf?: AskerBatchConf): Promise<T>
-  
-  get(url?: string, params?: any, conf?: AskerConf): Promise<any>
-  get<T>(url?: string, params?: any, conf?: AskerConf): Promise<T>
-  
-  option(url?: string, params?: any, conf?: AskerConf): Promise<any>
-  option<T>(url?: string, params?: any, conf?: AskerConf): Promise<T>
-
-  head(url?: string, params?: any, conf?: AskerConf): Promise<any>
-  head<T>(url?: string, params?: any, conf?: AskerConf): Promise<T>
-  
-  delete(url?: string, params?: any, conf?: AskerConf): Promise<any>
-  delete<T>(url?: string, params?: any, conf?: AskerConf): Promise<T>
+  get<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<T>
+  option<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<T>
+  head<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<T>
+  delete<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<T>
  
-  post(url?: string, body?: any, conf?: AskerConf): Promise<any>
-  post<T>(url?: string, body?: any, conf?: AskerConf): Promise<T>
-
-  put(url?: string, body?: any, conf?: AskerConf): Promise<any>
-  put<T>(url?: string, body?: any, conf?: AskerConf): Promise<T>
-
-  patch(url?: string, body?: any, conf?: AskerConf): Promise<any>
-  patch<T>(url?: string, body?: any, conf?: AskerConf): Promise<T>
+  post<T = any>(url?: string, body?: any, conf?: AskerConf): Promise<T>
+  put<T = any>(url?: string, body?: any, conf?: AskerConf): Promise<T>
+  patch<T = any>(url?: string, body?: any, conf?: AskerConf): Promise<T>
   
   /** JSONP implemented by ScriptDOM */
-  jsonp(url?: string, body?: any, conf?: AskerJsonpConf): Promise<any>
-  jsonp<T>(url?: string, body?: any, conf?: AskerJsonpConf): Promise<T>
-  jsonp(url?: string, callName?: string, conf?: AskerJsonpConf): Promise<any>
-  jsonp<T>(url?: string, callName?: string, conf?: AskerJsonpConf): Promise<T>
+  jsonp<T = any>(url?: string, body?: any, conf?: AskerJsonpConf): Promise<T>
+  jsonp<T = any>(url?: string, callName?: string, conf?: AskerJsonpConf): Promise<T>
   
   batch(url?: string, paramsOrbody?: any[], conf?: AskerBatchConf): Promise<any>
-  batch<T>(url?: string, paramsOrbody?: any[], conf?: AskerBatchConf): Promise<T>
+  batch<T = any>(url?: string, paramsOrbody?: any[], conf?: AskerBatchConf): Promise<T>
 
 }
 
@@ -182,3 +153,4 @@ export default Asker
 export function splitBlob (fileOrblob: Blob, piece: number): Blob[]
 export function safeCall (exceptionHandler: (e: any) => any): (exceptionHandler?: (e: any) => any) => any
 export function object2Query (obj: { [key: string]: any }, encode?: boolean): string
+export function query2Object<T = any> (query: string, raw: boolean = false): T

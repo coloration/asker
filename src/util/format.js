@@ -1,4 +1,4 @@
-import { isObj, isArr, isFunc, isIter, forEach } from './func'
+import { isObj, isArr, isStr, isFunc, isIter, forEach } from './func'
 
 export function object2Query (obj, encode = false) {
   if (!isObj(obj)) return ''
@@ -11,6 +11,23 @@ export function object2Query (obj, encode = false) {
   }, obj)
 
   return result.join('&')
+}
+
+export function query2Object (query, raw = false) {
+  if (!isStr(query)) return query
+  if (query[0] === '?') query = query.substr(1)
+  
+  return query.split('&').reduce(function (acc, curr) {
+    const p = curr.split('=')
+    if (p.length === 2) {
+      let val = p[1]
+      if (raw) {
+        try { val = JSON.parse(val) } catch (e) {}
+      }
+      acc[p[0]] = val
+    }
+    return acc
+  }, {})
 }
 
 export function object2Json (obj) {
