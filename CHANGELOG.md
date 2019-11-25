@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 0.6.7
+
+- export `window.Asker`. we can use Asker in `<script>` tag. detail in README.md
+
 ## 0.6.6
 
 ### New Feature

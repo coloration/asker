@@ -2,10 +2,7 @@ const path = require('path')
 
 module.exports = {
   entry: './src/index.js',
-  // mode: 'development',
   mode: 'production',
-
-  // devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -16,8 +13,8 @@ module.exports = {
     ]
   },
   output: {
-    filename: 'index.js',
+    filename: 'index.min.js',
     path: path.resolve(__dirname, 'lib'),
-    libraryTarget: 'umd',
+    libraryTarget: 'window'
   }
 }
