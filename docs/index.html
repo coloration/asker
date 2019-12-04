@@ -1,157 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Coloration Asker</title>
-  <link rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/mono-blue.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/mono-blue.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
 </head>
 <style>
-* { margin: 0; padding: 0; text-decoration: none; list-style: none; }
-body { color: #474747; }
-.container {
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 30px;
-  padding-right: 30px;
-}
-.light-color {
-  color: #f0f0f0;
-}
+  * {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+  }
 
-.dark-color {
-  color: #333;
-}
+  body {
+    color: #474747;
+  }
 
-.text-center {
-  text-align: center;
-}
+  .container {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
 
-.mgb-20 { margin-bottom: 20px;}
-.mgb-40 { margin-bottom: 40px;}
+  .light-color {
+    color: #f0f0f0;
+  }
 
-.code-box {
-  overflow-x: auto;
-  padding: 10px 6px;
-  margin: 0 -6px 10px;
-  background-color:#eaeef3;
-}
+  .dark-color {
+    color: #333;
+  }
 
-#toc {
-  margin: 20px 0;
-}
+  .text-center {
+    text-align: center;
+  }
 
-#toc li {
-  color: #999;
-  height: 30px;
-  line-height: 30px;
-  position: relative;
-}
+  .mgb-10 {
+    margin-bottom: 10px;
+  }
 
-#toc li::before {
-  content: "";
-  position: absolute;
-  font-size: 100px;
-  width: 0.06em;
-  height: 0.06em;
-  margin-top: -0.03em;
-  color: steelblue;
-  background-color: currentColor;
-  left: -14px;
-  top: 50%;
-  border-radius: 50%;
-}
 
-#toc a {
-  color: #999;
-}
+  .mgb-20 {
+    margin-bottom: 20px;
+  }
 
-header {
-  padding: 30px 0;
-  background-color: steelblue;
-}
-h1 {
-  text-align: center; 
-  font-size: 5em;
-}
+  .mgb-40 {
+    margin-bottom: 40px;
+  }
 
-header .desc {
-  font-size: 1.5em;
+  .code-box {
+    overflow-x: auto;
+    padding: 10px 6px;
+    margin: 0 -6px 10px;
+    background-color: #eaeef3;
+  }
 
-}
+  #toc {
+    margin: 20px 0;
+  }
 
-h2 {
-  font-size: 1.8em;
-  padding: 10px 0px;
-  border-bottom: 1px solid #eee;
-  margin-bottom: 10px;
-}
+  #toc li {
+    color: #999;
+    height: 30px;
+    line-height: 30px;
+    position: relative;
+  }
 
-h3 {
-  font-size: 1.5em;
-  padding: 8px 0px;
-  margin-bottom: 8px;
-}
+  #toc li::before {
+    content: "";
+    position: absolute;
+    font-size: 100px;
+    width: 0.06em;
+    height: 0.06em;
+    margin-top: -0.03em;
+    color: steelblue;
+    background-color: currentColor;
+    left: -14px;
+    top: 50%;
+    border-radius: 50%;
+  }
 
-p {
-  font-size: 1em;
-  margin-bottom: 8px;
-  line-height: 1.5em;
-  /* text-align: justify; */
-}
+  #toc a {
+    color: #999;
+  }
 
-footer {
-  background: #666;
-  height: 200px;
-  color: #f0f0f0;
-  padding: 20px 0;
-  font-size: .9em;
-}
+  #toc ul {
+    padding-left: 12px;
+  }
 
-footer a {
-  color: #f0f0f0;
-}
+  header {
+    padding: 30px 0;
+    background-color: steelblue;
+  }
 
-footer a:hover {
-  text-decoration: underline;
-}
+  h1 {
+    text-align: center;
+    font-size: 5em;
+  }
+
+  header .desc {
+    font-size: 1.5em;
+
+  }
+
+  h2 {
+    font-size: 1.8em;
+    padding: 10px 0px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+  }
+
+  h3 {
+    font-size: 1.5em;
+    padding: 8px 0px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 1em;
+    margin-bottom: 8px;
+    line-height: 1.5em;
+    /* text-align: justify; */
+  }
+
+  footer {
+    background: #666;
+    height: 200px;
+    color: #f0f0f0;
+    padding: 20px 0;
+    font-size: .9em;
+  }
+
+  footer a {
+    color: #f0f0f0;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
 </style>
+
 <body>
-<header id="header">
-  <h1 class="light-color text-center">Asker</h1>
-  <p class="light-color text-center desc mgb-40">
-    <em>a simple RESTful request tool for client</em>
-  </p>
-  
-  <div class="light-color container">
-    <code>
+  <header id="header">
+    <h1 class="light-color text-center">Asker</h1>
+    <p class="light-color text-center desc mgb-40">
+      <em>a simple RESTful request tool for client</em>
+    </p>
+    <div class="text-center mgb-20">
+      <img src="https://img.shields.io/npm/v/@coloration/asker.svg" alt="version">
+      <img src="https://img.shields.io/npm/l/@coloration/asker.svg" alt="lic">
+      <img src="https://img.shields.io/npm/dm/@coloration/asker.svg" alt="Download">
+      <img src="https://img.shields.io/bundlephobia/min/@coloration/asker@0.6.7" alt="min">
+      <img src="https://img.shields.io/bundlephobia/minzip/@coloration/asker@0.6.7" alt="minzip">
+    </div>
+    <div class="light-color container">
+      <code>
       <pre>
 $ yarn add @coloration/asker -S
-// or
 $ npm i @coloration/asker -S
     </pre>
   </code>
 
-  <code>
+      <code>
     <pre>
 import Asker from '@coloration/asker'
+// or link https://raw.githubusercontent.com/coloration/asker/master/lib/index.min.js
 
 Asker.get('http://api.io/list', { page: 1, size: 20 })
       </pre>
     </code>
-  </div>
-</header>
+    </div>
+  </header>
 
-<section class="container">
-<ul id="toc"></ul>
-<h2 id="instance">Instance</h2>
-<p>You can <code>new</code> a object to cache some configure</p>
-<div class="code-box">
-  <pre><code class="javascript">import Asker from '@coloration/asker'
+  <section class="container">
+    <ul id="toc">
+      <li>
+        <a href="#instance">Instance</a>
+      </li>
+      <li>
+        <a href="#methods">Methods</a>
+      </li>
+      <ul>
+        <li><a href="#methods-normal">Normal</a></li>
+        <li><a href="#methods-jsonp">JSONP</a></li>
+        <li><a href="#methods-batch">Batch Request</a></li>
+        <li><a href="#methods-custom-mock">Custom & Mock</a></li>
+      </ul>
+      <li>
+        <a href="#features">Features</a>
+
+      </li>
+      <ul>
+        <li><a href="#features-cache">Cache responses for Getlike methods</a></li>
+        <li><a href="#features-posttype">Post Type</a></li>
+      </ul>
+    </ul>
+    <h2 id="instance">Instance</h2>
+    <p>You can <code>new</code> a object to cache some configure</p>
+    <div class="code-box">
+      <pre><code class="javascript">import Asker from '@coloration/asker'
 
 const api = new Asker({
   baseUrl: 'http://api.io'
@@ -160,11 +213,11 @@ const api = new Asker({
 api.get('/list', { page: 1, size: 20 })
 api.post('/article', { title: 'a article', content: 'write ...' })
 </code></pre>
-</div>
+    </div>
 
-<p>Below is a detail configure for Asker, there are some example for configure after this: </p>
-<div class="code-box">
-<pre><code class="javascript">export interface AskerConf {
+    <p>Below is a detail configure for Asker, there are some example for configure after this: </p>
+    <div class="code-box">
+      <pre><code class="javascript">export interface AskerConf {
   /** a sub url, it will be added after `baseUrl` at last */
   url?: string,
   
@@ -237,13 +290,13 @@ api.post('/article', { title: 'a article', content: 'write ...' })
   /** other custom props */
   [key: string]: any
 }</code></pre>
-</div>
+    </div>
 
 
-<h2 id="methods">Methods</h2>
-<h3 id="methods-normal">Normal</h3>
-<div class="code-box">
-<pre><code class="javascript">import Asker from '@coloration/asker'
+    <h2 id="methods">Methods</h2>
+    <h3 id="methods-normal">Normal</h3>
+    <div class="code-box">
+      <pre><code class="javascript">import Asker from '@coloration/asker'
 
 Asker.get('http://api.io', { page: 1, size: 20 })
 Asker.post(
@@ -255,35 +308,38 @@ Asker.post(
     params: { title: 'article' }
   }
 )</code></pre>
-</div>
-<p>all methods: </p>
-<p>
-  <span>post like:</span> 
-  <code>post</code>
-  <code>patch</code>
-  <code>put</code>
-</p>
-<p>
-  <span>get like:</span> 
-  <code>get</code>
-  <code>delete</code>
-  <code>options</code>
-  <code>head</code>
-</p>
-<h3 id="methods-jsonp">JSONP</h3>
-<p>the <code>jsonp</code> field get from backend developer or document of the origin server.</p>
-<p><span class="Note"></span> jsonp is a outdate way to handle the across origin.</p>
-<div class="code-box">
-<pre><code class="javascript">Asker.jsonp(
-  'http://api.io/jsonp', 
-  { page: 1, size: 20 }, 
-  { jsonp: 'jsoncallback' }
+    </div>
+    <p>all methods: </p>
+    <p>
+      <span>post like:</span>
+      <code>post</code>
+      <code>patch</code>
+      <code>put</code>
+    </p>
+    <p>
+      <span>get like:</span>
+      <code>get</code>
+      <code>delete</code>
+      <code>options</code>
+      <code>head</code>
+    </p>
+    <h3 id="methods-jsonp">JSONP</h3>
+    <p>the <code>jsonp</code> field get from backend developer or document of the origin server.</p>
+    <p><span class="Note"></span> jsonp is a outdate way to handle the across origin.</p>
+    <div class="code-box">
+      <pre><code class="javascript">Asker.jsonp(
+  'http://api.io/jsonp', { page: 1, size: 20 }, { jsonp: 'jsoncallback' }
 )
-.then(response => {})</pre></code>
-</div>
-<h3 id="methods-batch">Batch Requests</h3>
-<div class="code-box">
-  <code><pre>
+
+// or special callback name in 2rd parameter 
+Asker.jsonp(
+  'http://api.io/jsop?page=1&size=20', 'jsoncallback'
+)
+</pre></code>
+    </div>
+    <h3 id="methods-batch">Batch Requests</h3>
+    <div class="code-box">
+      <code><pre>
 Asker.batch(
   'http://api.io/upload', 
   // an array or a normal param
@@ -298,15 +354,15 @@ Asker.batch(
 )
 // apply the Promise.all for these requests
 .then(allResponses => {})</code></pre>
-</div>
-<h3 id="methods-custom-mock">Custom & Mock</h3>
-<p>
-  The <code>jsonp</code> and <code>batch</code> are implemented by <code>apater</code>. 
-  We also could implement some other methods. Other platforms, for example, miniprogram, 
-  its enviorment support JavaScript, but not support XMLHTTPRequest.
-</p>
-<div class="code-box">
-<pre><code class="javascript">export function get (url, params, conf) {
+    </div>
+    <h3 id="methods-custom-mock">Custom & Mock</h3>
+    <p>
+      The <code>jsonp</code> and <code>batch</code> are implemented by <code>apater</code>.
+      We also could implement some other methods. Other platforms, for example, miniprogram,
+      its enviorment support JavaScript, but not support XMLHTTPRequest.
+    </p>
+    <div class="code-box">
+      <pre><code class="javascript">export function get (url, params, conf) {
   return Asker.get(url, params, Object.assign(conf, {
     adapter (conf) {
       // ...
@@ -314,101 +370,103 @@ Asker.batch(
     }
   }))
 }</code></pre>
-</div>
-<p>
-  You are mocking when you return a data in the adapter function instead of the promise. 
-  You could also pass a normal data to <code>adapter</code>.
-</p>
-<div class="code-box">
-<pre><code class="javascript">Asker.get('whatever string', whateverParam, {
+    </div>
+    <p>
+      You are mocking when you return a data in the adapter function instead of the promise.
+      You could also pass a normal data to <code>adapter</code>.
+    </p>
+    <div class="code-box">
+      <pre><code class="javascript">Asker.get('whatever string', whateverParam, {
   adapter: [1, 2, 3]
 })
 .then(response => {}) // [1, 2, 3]
 }</code></pre>
-</div>
-<h2 id="cache">Cache responses for Getlike methods</h2>
-<p>When we special <code>getCache : true</code>，Asker hold the response in 
-<code>Asker.cache</code> object with the url and query until you reload the browser.</p>
-<p>When we request with the same url, params and <code>getCache</code> configure field,
-Asker will find from the <code>Asker.cache</code> firstly. Inexsitly, will request.</p>
-<div class="code-box">
-<pre><code class="javascript">// request
+    </div>
+    <h2 id="features">Features</h2>
+    <h3 id="features-cache">Cache responses for Getlike methods</h3>
+    <p>When we special <code>getCache : true</code>，Asker hold the response in
+      <code>Asker.cache</code> object with the url and query until you reload the browser.</p>
+    <p>When we request with the same url, params and <code>getCache</code> configure field,
+      Asker will find from the <code>Asker.cache</code> firstly. Inexsitly, will request.</p>
+    <div class="code-box">
+      <pre><code class="javascript">// request
 Asker.get('http://api.io/config', { type: 1 }, { getCache: true }) 
 // find response from cache
 Asker.get('http://api.io/config', { type: 1 }, { getCache: true }) 
 // request
 Asker.get('http://api.io/config', { type: 2 }, { getCache: true }) </code></pre>
-</div>
-<h2 id="post-type">Post Type</h2>
-<p>Asker will transform the body type when you set the <code>postType</code> field. Default is <code>json</code></p>
-<div class="code-box">
-<pre><code class="javascript">Asker.post(
+    </div>
+    <h3 id="features-posttype">Post Type</h3>
+    <p>Asker will transform the body type when you set the <code>postType</code> field. Default is <code>json</code></p>
+    <div class="code-box">
+      <pre><code class="javascript">Asker.post(
   'http://api.io/upload', 
   { file: file, name: 'photoname' },
   { postType: 'form-data' }
 )
 .then(res => {})</code></pre>
-</div>
-<h2 id="timeout">Timeout</h2>
-<h2 id="upload-download-progress">Upload & Download Progress</h2>
-<h2 id="auth-with-before">Auth with before</h2>
-<h2 id="format-with-after">Format with after</h2>
+    </div>
+    <h2 id="timeout">Timeout</h2>
+    <h2 id="upload-download-progress">Upload & Download Progress</h2>
+    <h2 id="auth-with-before">Auth with before</h2>
+    <h2 id="format-with-after">Format with after</h2>
 
 
-</section>
+  </section>
 
-<footer>
-  <div class="container">
-    <p>Author: wangbinyu / 406279919@qq.com</p>
-    <p>Github: <a href="https://github.com/coloration/asker">https://github.com/coloration/asker</a></p>
-  </div>
-</footer>
+  <footer>
+    <div class="container">
+      <p>Author: wangbinyu / 406279919@qq.com</p>
+      <p>Github: <a href="https://github.com/coloration/asker">https://github.com/coloration/asker</a></p>
+    </div>
+  </footer>
 </body>
 <script>
-document.addEventListener('DOMContentLoaded', (event) => {
-document.querySelectorAll('pre code').forEach((block) => {
-  hljs.highlightBlock(block);
-});
-})
-function debounce (fn, time) {
-  var timer
-  var _this = this
+  document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('pre code').forEach((block) => {
+      hljs.highlightBlock(block);
+    });
+  })
+  function debounce(fn, time) {
+    var timer
+    var _this = this
 
-  return function () {
-    var _arg = arguments
-    clearTimeout(timer)
-    timer = setTimeout(function () {
-      fn.apply(_this, _arg)
-    }, time)
+    return function () {
+      var _arg = arguments
+      clearTimeout(timer)
+      timer = setTimeout(function () {
+        fn.apply(_this, _arg)
+      }, time)
+    }
   }
-}
 
-function throttle (fn, time) {
-  var hasRun = false
-  var _this = this
-  return function () {
-    if (hasRun) return
-    fn.apply(_this, arguments)
-    hasRun = true
-    setTimeout(function () {
-      hasRun = false
-    }, time)
+  function throttle(fn, time) {
+    var hasRun = false
+    var _this = this
+    return function () {
+      if (hasRun) return
+      fn.apply(_this, arguments)
+      hasRun = true
+      setTimeout(function () {
+        hasRun = false
+      }, time)
+    }
   }
-}
 
-var tocDom = document.getElementById('toc')
-var h2Doms = document.getElementsByTagName('h2')
+// var tocDom = document.getElementById('toc')
+// var h2Doms = document.getElementsByTagName('h2')
 
-for (var i = 0; i < h2Doms.length; i++) {
-  var h2Dom = h2Doms[i]
-  var liDom = document.createElement('li')
-  liDom.innerHTML = '<a href="#' + h2Dom.id+ '">' + h2Dom.innerHTML + '</a>'
-  
-  tocDom.appendChild(liDom)
-}
+// for (var i = 0; i < h2Doms.length; i++) {
+//   var h2Dom = h2Doms[i]
+//   var liDom = document.createElement('li')
+//   liDom.innerHTML = '<a href="#' + h2Dom.id+ '">' + h2Dom.innerHTML + '</a>'
+
+//   tocDom.appendChild(liDom)
+// }
 
 
 
 
 </script>
+
 </html>

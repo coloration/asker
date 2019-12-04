@@ -5,8 +5,8 @@ export type AskerResponseHeaders = {
 }
 
 
-export type AskerResponse = {
-  data: any,
+export type AskerResponse<T = any> = {
+  data: T,
   status: number,
   statusText: string,
   headers: AskerResponseHeaders,
@@ -116,35 +116,34 @@ declare class Asker {
 
   conf: AskerConf
 
-  static get<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<T>
-  static option<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<T>
-  static head<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<T>
-  static delete<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<T>
+  static get<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<AskerResponse<T>>
+  static option<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<AskerResponse<T>>
+  static head<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<AskerResponse<T>>
+  static delete<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<AskerResponse<T>>
 
-  static post<T = any>(url?: string, body?: any, conf?: AskerConf): Promise<T>
-  static put<T = any>(url?: string, body?: any, conf?: AskerConf): Promise<T>
-  static patch<T = any>(url?: string, body?: any, conf?: AskerConf): Promise<T>
+  static post<T = any>(url?: string, body?: any, conf?: AskerConf): Promise<AskerResponse<T>>
+  static put<T = any>(url?: string, body?: any, conf?: AskerConf): Promise<AskerResponse<T>>
+  static patch<T = any>(url?: string, body?: any, conf?: AskerConf): Promise<AskerResponse<T>>
   
-  static jsonp<T = any>(url?: string, callName?: string, conf?: AskerJsonpConf): Promise<T>
-  static jsonp<T = any>(url?: string, body?: any, conf?: AskerJsonpConf): Promise<T>
+  static jsonp<T = any>(url?: string, callName?: string, conf?: AskerJsonpConf): Promise<AskerResponse<T>>
+  static jsonp<T = any>(url?: string, params?: any, conf?: AskerJsonpConf): Promise<AskerResponse<T>>
 
-  static batch<T = any>(url?: string, paramsOrbody?: any[], conf?: AskerBatchConf): Promise<T>
+  static batch<T = any>(url?: string, paramsOrbody?: any[], conf?: AskerBatchConf): Promise<AskerResponse<T>>
   
-  get<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<T>
-  option<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<T>
-  head<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<T>
-  delete<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<T>
+  get<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<AskerResponse<T>>
+  option<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<AskerResponse<T>>
+  head<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<AskerResponse<T>>
+  delete<T = any>(url?: string, params?: any, conf?: AskerConf): Promise<AskerResponse<T>>
  
-  post<T = any>(url?: string, body?: any, conf?: AskerConf): Promise<T>
-  put<T = any>(url?: string, body?: any, conf?: AskerConf): Promise<T>
-  patch<T = any>(url?: string, body?: any, conf?: AskerConf): Promise<T>
+  post<T = any>(url?: string, body?: any, conf?: AskerConf): Promise<AskerResponse<T>>
+  put<T = any>(url?: string, body?: any, conf?: AskerConf): Promise<AskerResponse<T>>
+  patch<T = any>(url?: string, body?: any, conf?: AskerConf): Promise<AskerResponse<T>>
   
   /** JSONP implemented by ScriptDOM */
-  jsonp<T = any>(url?: string, body?: any, conf?: AskerJsonpConf): Promise<T>
-  jsonp<T = any>(url?: string, callName?: string, conf?: AskerJsonpConf): Promise<T>
+  jsonp<T = any>(url?: string, params?: any, conf?: AskerJsonpConf): Promise<AskerResponse<T>>
+  jsonp<T = any>(url?: string, callName?: string, conf?: AskerJsonpConf): Promise<AskerResponse<T>>
   
-  batch(url?: string, paramsOrbody?: any[], conf?: AskerBatchConf): Promise<any>
-  batch<T = any>(url?: string, paramsOrbody?: any[], conf?: AskerBatchConf): Promise<T>
+  batch<T = any>(url?: string, paramsOrbody?: any[], conf?: AskerBatchConf): Promise<AskerResponse<T>>
 
 }
 

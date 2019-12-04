@@ -1,7 +1,13 @@
 # ChangeLog
 
+## 0.6.8
+
+### Fix
+- change `Promise<T>` response type to `Promise<AskerResponse<T>>`  in `d.ts`
+
 ## 0.6.7
 
+### New Feature
 - export `window.Asker`. we can use Asker in `<script>` tag. detail in README.md
 
 ## 0.6.6
