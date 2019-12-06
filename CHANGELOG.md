@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 0.6.9
+### Rollback
+- rollback response type from `Promise<AskerResponse<T>>` to `Promise<T>` in `d.ts`
+
 ## 0.6.8
 
 ### Fix
