@@ -26,5 +26,5 @@
     "test": "jest"
   },
   "author": "Wang.Binyu",
-  "license": "ISC"
+  "license": "MIT"
 }
