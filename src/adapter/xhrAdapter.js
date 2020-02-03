@@ -1,22 +1,25 @@
-import { forEach, isFunc, isPositive } from '../util/func'
-import { merge, getResHeaders } from '../util/format'
+import { forEach, isFunc, isPositive, isUnd } from '../util/func'
+import { merge, getResHeaders, createErr } from '../util/format'
 import { defRes, ABORT, ERROR, TIMEOUT } from '../util/def' 
+import { Canceler } from '../canceler'
 
 export default function xhrAdapter (conf) {
   return new Promise(function promiseCreator (resolve, reject) {
     let xhr = new XMLHttpRequest()
+
+    function clear () {
+      xhr = null
+    }
     
     xhr.onreadystatechange = function handleStateChange () {
       if (!xhr || xhr.readyState !== 4) return
-      
+      if (xhr.status === 0) return
+
       const valid = isFunc(conf.validator) ? 
         conf.validator(xhr.status) :
         xhr.status >= 200 && xhr.status < 300
       
-      if (!valid) return reject({ 
-        message: xhr.responseText, 
-        status: xhr.status
-      })
+      if (!valid) return reject(createErr(xhr.status, xhr.responseText))
 
       const headers = getResHeaders(xhr)
       const res = merge({}, defRes, {
@@ -28,26 +31,36 @@ export default function xhrAdapter (conf) {
         request: xhr
       })
 
-      xhr  = null
+      clear()
       resolve(res)
     }
 
+    
     xhr.onabort = function handleAbort () {
       if (!xhr) return 
-      isFunc(conf.onAbort) ? conf.onAbort.call(null, ABORT, xhr) : reject(ABORT)
-      xhr = null
+      isFunc(conf.onAbort) ? 
+        conf.onAbort.call(null, ABORT, xhr) : 
+        reject(createErr(xhr.status, ABORT))
+      
+      clear()
     }
 
     xhr.onerror = function handleError () {
       if (!xhr) return 
-      isFunc(conf.onError) ? conf.onError.call(null, ERROR, xhr) : reject(ERROR)
-      xhr = null
+      isFunc(conf.onError) ? 
+        conf.onError.call(null, ERROR, xhr) : 
+        reject(createErr(xhr.status, ERROR))
+      
+      clear()
     }
 
     xhr.ontimeout = function handleTimeout () {
       if (!xhr) return 
-      isFunc(conf.onTimeout) ? conf.onTimeout.call(null, TIMEOUT, xhr) : reject(TIMEOUT)
-      xhr = null
+      isFunc(conf.onTimeout) ? 
+        conf.onTimeout.call(null, TIMEOUT, xhr) : 
+        reject(createErr(xhr.status, TIMEOUT))
+      
+      clear()
     }
 
     if (isPositive(conf.timeout)) xhr.timeout = conf.timeout
@@ -55,7 +68,6 @@ export default function xhrAdapter (conf) {
     if (conf.withCredentials) xhr.withCredentials = true
 
     const reqHeaders = conf.headers
-    xhr.open(conf.method.toUpperCase(), conf.uri, true)
 
     forEach(function formatHeader (header, key) {
       if (!conf.body && key.toLowerCase() === 'content-type') {
@@ -66,7 +78,10 @@ export default function xhrAdapter (conf) {
       }
     }, reqHeaders)
 
-
+    // Add withCredentials to request if needed
+    if (!isUnd(conf.withCredentials)) {
+      xhr.withCredentials = !!conf.withCredentials
+    }
 
     if (isFunc(conf.onDownloadProgress)) 
       xhr.addEventListener('progress', function progress (progressEvent) {
@@ -79,6 +94,18 @@ export default function xhrAdapter (conf) {
         conf.onUploadProgress.call(null, progressEvent, xhr, conf)
       })
     
+    if (conf.canceler) {
+      conf.canceler.promise.then(function xhrCancel () {
+        if (xhr) {
+          xhr.abort()
+          clear()
+        }
+      })
+    }
+
+    if (!xhr) return
+
+    xhr.open(conf.method.toUpperCase(), conf.uri, true)
     xhr.send(conf.body)
   })
 }

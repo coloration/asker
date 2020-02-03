@@ -1,6 +1,6 @@
 {
   "name": "@coloration/asker",
-  "version": "0.6.9",
+  "version": "0.7.0",
   "description": "a simple web http request tool",
   "main": "lib/index.js",
   "directories": {
@@ -22,7 +22,7 @@
   },
   "scripts": {
     "build": "node_modules/.bin/webpack-cli",
-    "build-window": "node_modules/.bin/webpack-cli --config webpack.window.js",
+    "build:window": "node_modules/.bin/webpack-cli --config webpack.window.js",
     "test": "jest"
   },
   "author": "Wang.Binyu",

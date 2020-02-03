@@ -156,8 +156,8 @@
       <img src="https://img.shields.io/npm/v/@coloration/asker.svg" alt="version">
       <img src="https://img.shields.io/npm/l/@coloration/asker.svg" alt="lic">
       <img src="https://img.shields.io/npm/dm/@coloration/asker.svg" alt="Download">
-      <img src="https://img.shields.io/bundlephobia/min/@coloration/asker@0.6.7" alt="min">
-      <img src="https://img.shields.io/bundlephobia/minzip/@coloration/asker@0.6.7" alt="minzip">
+      <img src="https://img.shields.io/bundlephobia/min/@coloration/asker@0.7.0" alt="min">
+      <img src="https://img.shields.io/bundlephobia/minzip/@coloration/asker@0.7.0" alt="minzip">
     </div>
     <div class="light-color container">
       <code>
@@ -199,6 +199,8 @@ Asker.get('http://api.io/list', { page: 1, size: 20 })
       <ul>
         <li><a href="#features-cache">Cache responses for Getlike methods</a></li>
         <li><a href="#features-posttype">Post Type</a></li>
+        <li><a href="#features-cancel">Cancel Request</a></li>
+        <li><a href="#features-timeout">Timeout</a></li>
       </ul>
     </ul>
     <h2 id="instance">Instance</h2>
@@ -286,6 +288,9 @@ api.post('/article', { title: 'a article', content: 'write ...' })
   
   /** called when xhr trigger `progress` event */
   onDownloadProgress?: (e: ProgressEvent, xhr: XMLHttpRequest, conf: AskerConf) => any
+
+  /** cancellion */
+  canceler?: Canceler
 
   /** other custom props */
   [key: string]: any
@@ -406,7 +411,39 @@ Asker.get('http://api.io/config', { type: 2 }, { getCache: true }) </code></pre>
 )
 .then(res => {})</code></pre>
     </div>
-    <h2 id="timeout">Timeout</h2>
+    <h3 id="features-cancel">Cancel Request</h3>
+
+<p>after calling the cancel methods, we will receive an error in <code>promise.catch</code> or <code>conf.onAbort</code> method.</p>
+
+    <div class="code-box">
+      <pre><code class="javascript">import { Canceler } from '@coloration/asker'
+
+const canceler = new Canceler()
+
+Asker.get('http://api.io/eg1', null, { canceler })
+Asker.get('http://api.io/eg2', null, { canceler })
+
+canceler.cancel()</code></pre>
+    </div>
+
+    <h3 id="features-timeout">Timeout</h3>
+
+    <p>if response timeout, we will receive an error in <code>promise.catch</code> or <code>conf.onTimeout</code> method.</p>
+
+    <div class="code-box">
+      <pre><code class="javascript">Asker.get('http://api.io/test-timeout', null, { 
+  timeout: 3000,
+  onTimeout: (error, xhr, conf) => {}
+})
+
+Asker.get('http://api.io/test-timeout2', null, { timeout: 3000 })
+.catch(error => {
+  const { status, message } = error
+
+  status === 0
+  message === Asker.errorType.TIMEOUT
+})</code></pre>
+    </div>
     <h2 id="upload-download-progress">Upload & Download Progress</h2>
     <h2 id="auth-with-before">Auth with before</h2>
     <h2 id="format-with-after">Format with after</h2>

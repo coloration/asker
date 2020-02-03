@@ -1,7 +1,21 @@
 # ChangeLog
 
+## 0.7.0
+
+*2020-02-03*
+
+### New Feature
+
+- `xhr` and `jsonp` can canel now, 
+
+### Optimization
+
+- optimize the code of `timeout`, `abort` and `error` in `xhr` adapter
+
 ## 0.6.9
+
 ### Rollback
+
 - rollback response type from `Promise<AskerResponse<T>>` to `Promise<T>` in `d.ts`
 
 ## 0.6.8
@@ -12,6 +26,7 @@
 ## 0.6.7
 
 ### New Feature
+
 - export `window.Asker`. we can use Asker in `<script>` tag. detail in README.md
 
 ## 0.6.6

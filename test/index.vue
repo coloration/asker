@@ -1,35 +1,68 @@
 <template>
-<div>
-  1111
-  <Upload />  
-</div>  
+  <div>
+    1111
+    <!-- <Upload />   -->
+  </div>
 </template>
 
 <script>
 // import Asker from '../src/asker.js'
-import Asker, { safeCall, splitBlob } from '../src/index'
+import Asker, { safeCall, splitBlob, Canceler } from "../src/index";
 
-import Upload from './upload.vue'
-import { 
-  adapterExam1Api, 
-  adapterExam2Api,
-  adapterExam3Api,
-  adapterExam4Api,
-  adapterExam5Api
-} from './adapter'
+// import Upload from './upload.vue'
+// import {
+//   adapterExam1Api,
+//   adapterExam2Api,
+//   adapterExam3Api,
+//   adapterExam4Api,
+//   adapterExam5Api
+// } from './adapter'
 
-import { methodApi } from './method'
+import { methodApi } from "./method";
 
 export default {
-  components: { Upload },
-  mounted () {
+  // components: { Upload },
+  mounted() {
+
+    const canceler = new Canceler()
+
+    Asker.get("http://localhost:3000/test-timeout", undefined, {
+      timeout: 3000,
+      onTimeout: (message, xhr) => {
+        console.log("error args", message, xhr);
+      },
+      canceler: canceler
+    })
+      .then(res => {
+        console.log("timeout response", res);
+      })
+      .catch(error => {
+        console.log("error", error);
+      });
+
+       Asker.get("http://localhost:3000/test-timeout", undefined, {
+      timeout: 3000,
+      onTimeout: (message, xhr) => {
+        console.log("error args", message, xhr);
+      },
+      canceler: canceler
+    })
+      .then(res => {
+        console.log("timeout response", res);
+      })
+      .catch(error => {
+        console.log("error", error);
+      });
 
 
+    setTimeout(function () {
+      canceler.cancel()
+    }, 4000)
 
     // Asker.conf.before = (conf) => {
     //   console.log('before')
     //   conf.headers.test = conf.headers.test ? conf.headers.test + 1 : 1
-    
+
     //   return conf
     // }
     // Asker.conf.after = (res) => {
@@ -37,30 +70,29 @@ export default {
     //   return res.data
     // }
 
-    Asker.jsonp(
-      'http://assistant.yingshe.com/index/taohuayun', 
-      { a: 1 }, 
-      { jsonp: 'jsoncallback', getCache: true }
-    )
-    .then(data => {
-      console.log(data, 6666)
-      Asker.jsonp(
-        'http://assistant.yingshe.com/index/taohuayun', 
-        { a: 1 }, 
-        { jsonp: 'jsoncallback', getCache: true }
-      )
-      .then(data => {
-        console.log(data, 777)
-      })
-    })
-
+    // Asker.jsonp(
+    //   'http://assistant.yingshe.com/index/taohuayun',
+    //   { a: 1 },
+    //   { jsonp: 'jsoncallback', getCache: true }
+    // )
+    // .then(data => {
+    //   console.log(data, 6666)
+    //   Asker.jsonp(
+    //     'http://assistant.yingshe.com/index/taohuayun',
+    //     { a: 1 },
+    //     { jsonp: 'jsoncallback', getCache: true }
+    //   )
+    //   .then(data => {
+    //     console.log(data, 777)
+    //   })
+    // })
 
     // const safe = safeCall(function (e) {
     //   console.log(e)
     // })
 
     // const a = safe((h) => {
-      
+
     //   return Promise.resolve('right')
     // })
     // .then(res => {
@@ -68,9 +100,6 @@ export default {
     // })
 
     // console.log('a', a)
-
-
-    
 
     // window.asker_jsonp666 = function (data) {
     //   console.log('2222', data)
@@ -86,7 +115,6 @@ export default {
 
     // document.body.appendChild(scriptDom)
 
-
     // methodApi.conf.after = (res) => {
     //   return res.data
     // }
@@ -95,9 +123,7 @@ export default {
     //   return conf
     // }
 
-    
-    
-    const log = console.log
+    const log = console.log;
 
     // log(safeCall)
     // log(splitBlob)
@@ -110,7 +136,6 @@ export default {
     // adapterExam4Api.get('a url query list', { page: 2, pageSize: 20 }).then(log)
     // adapterExam5Api.get('a url query list', { page: 2, pageSize: 20 }).then(log)
 
-
     // methodApi.get('/comments').then(log)
     // methodApi.get('/comments', { id: 1, foo: 2 }).then(log)
     // methodApi.post('/comment', { id: '1', comment: '我已经出门了' }, { postType: 'form-data' }).then(log)
@@ -121,9 +146,8 @@ export default {
     // methodApi.put('/testput', { name: 'joe' }, { postType: 'json' }).then(log)
     // methodApi.patch('/testpatch', { name: 'david' }).then(log).then(log)
   }
-}
+};
 </script>
 
 <style>
-
 </style>

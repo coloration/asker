@@ -2,7 +2,6 @@ import { mergeQueue, merge }  from './util/format'
 import { ABORT, ERROR, TIMEOUT, defConf } from './util/def'
 import cache from './cache'
 
-
 function Asker (conf) {
   /// no new
   if (!(this instanceof Asker)) {

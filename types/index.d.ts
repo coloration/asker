@@ -85,6 +85,9 @@ export interface AskerConf {
   /** called when xhr trigger `progress` event */
   onDownloadProgress?: (e: ProgressEvent, xhr: XMLHttpRequest, conf: AskerConf) => any
 
+  /** cancellion */
+  canceler?: Canceler
+
   /** other custom props */
   [key: string]: any
 }
@@ -100,7 +103,6 @@ export interface AskerBatchConf extends AskerConf {
   /** retry times when a request failed */
   retry?: number
 }
-
 
 declare class Asker {
   constructor (conf?: AskerConf)
@@ -147,9 +149,19 @@ declare class Asker {
 
 }
 
+declare class Canceler {
+  
+  public cancel(): void
+
+  promise: Promise<unknown>
+  resolve(): void
+}
+
+
 export default Asker
 
+export { Canceler }
 export function splitBlob (fileOrblob: Blob, piece: number): Blob[]
 export function safeCall (exceptionHandler: (e: any) => any): (exceptionHandler?: (e: any) => any) => any
 export function object2Query (obj: { [key: string]: any }, encode?: boolean): string
-export function query2Object<T = any> (query: string, raw: boolean = false): T
+export function query2Object<T = any> (query: string, raw: boolean): T

@@ -1,6 +1,6 @@
 export default function jsonpAdapter (conf, defRes) {
 
-  return new Promise(function promiseCreator (resolve, reject) {
+  return new Promise(function promiseCreator (resolve) {
 
     const callbackName = 'asker_jsonp' + new Date().getTime()
     const jsonpQuery = `${conf.jsonp}=${callbackName}`
@@ -12,6 +12,14 @@ export default function jsonpAdapter (conf, defRes) {
 
     const scriptDom = document.createElement('script')
     scriptDom.src = uri
+
+    function clear () {
+
+      if (!window[callbackName]) return
+
+      delete window[callbackName]
+      document.body.removeChild(scriptDom)
+    }
     
     window[callbackName] = function jsonpCallback (resData) {
       const response = Object.assign({}, defRes, {
@@ -23,9 +31,12 @@ export default function jsonpAdapter (conf, defRes) {
       })
 
       resolve(response)
-      delete window[callbackName]
-      document.body.removeChild(scriptDom)
+      clear()
     }
+
+    if (conf.canceler) conf.canceler.promise.then(clear)
+
+    if (!window[callbackName]) return
 
     document.body.appendChild(scriptDom)
 
