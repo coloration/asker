@@ -6,7 +6,7 @@ export default function batch (url, params, conf) {
 
   const method = conf.method || 'get'
   // max number of batchs
-  const slice = conf.slice || conf.body.length
+  const slice = conf.slice || params.length
   // retry times of a batch
   const retry = conf.retry || 0
   
@@ -17,10 +17,10 @@ export default function batch (url, params, conf) {
   const remain = params.slice(slice)
   const failTimes = new Map()
 
-  function rec (url, param, conf, queue) {
+  function rec (url, param, conf, queue, index) {
     return _this[method](url, param, conf)
     .then(function oneSuccess (res) {
-      responses.push(res)
+      responses[index] = res
     })
     .catch(function oneFailAndRetry (e) {
 
@@ -52,7 +52,7 @@ export default function batch (url, params, conf) {
 
 
   return new Promise(function promiseCreator (resolve, reject) {
-    Promise.all(firstBatch.map(param => rec(url, param, conf, remain)))
+    Promise.all(firstBatch.map((param, i) => rec(url, param, conf, remain, i)))
     .then(function allSuccess () {
       resolve(responses)
     })

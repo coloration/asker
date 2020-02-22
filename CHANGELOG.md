@@ -1,5 +1,13 @@
 # ChangeLog
 
+## 0.7.1
+
+*2020-02-22*
+
+### Fix
+
+- [#2](https://github.com/coloration/asker/issues/2) responses of Batch methods are unordered. param slice has no default value.
+
 ## 0.7.0
 
 *2020-02-03*
