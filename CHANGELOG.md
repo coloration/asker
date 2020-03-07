@@ -1,5 +1,13 @@
 # ChangeLog
 
+## 0.8.0
+
+*2020-03-07*
+
+### New Feature
+
+- export Http Status. copy from `nestjs`
+
 ## 0.7.1
 
 *2020-02-22*
