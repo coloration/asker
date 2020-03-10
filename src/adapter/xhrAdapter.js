@@ -67,6 +67,9 @@ export default function xhrAdapter (conf) {
 
     if (conf.withCredentials) xhr.withCredentials = true
 
+    // 'setRequestHeader' on 'XMLHttpRequest': The object's state must be OPENED
+    xhr.open(conf.method.toUpperCase(), conf.uri, true)
+    
     const reqHeaders = conf.headers
 
     forEach(function formatHeader (header, key) {
@@ -105,7 +108,7 @@ export default function xhrAdapter (conf) {
 
     if (!xhr) return
 
-    xhr.open(conf.method.toUpperCase(), conf.uri, true)
     xhr.send(conf.body)
+
   })
 }

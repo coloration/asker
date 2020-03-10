@@ -1,5 +1,13 @@
 # ChangeLog
 
+## 0.8.1
+
+*2020-03-10*
+
+### Fix
+
+- 'setRequestHeader' on 'XMLHttpRequest': The object's state must be OPENED from `0.7.0`
+
 ## 0.8.0
 
 *2020-03-07*
