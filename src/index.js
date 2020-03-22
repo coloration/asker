@@ -31,5 +31,5 @@ Asker.prototype.batch = batch
 export default Asker
 export { Asker }
 export { Canceler }
-export { splitBlob, safeCall } from './public'
+export { splitBlob, safeCall, HttpStatus } from './public'
 export { object2Query, query2Object } from './util/format'
