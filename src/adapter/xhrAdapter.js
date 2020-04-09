@@ -22,8 +22,10 @@ export default function xhrAdapter (conf) {
       if (!valid) return reject(createErr(xhr.status, xhr.responseText))
 
       const headers = getResHeaders(xhr)
+      const responseData = !conf.responseType || conf.responseType === 'text' ? request.responseText : request.response
+      
       const res = merge({}, defRes, {
-        data: conf.responseType === 'text' ? xhr.responseText : JSON.parse(xhr.responseText),
+        data: responseData,
         status: xhr.status,
         statusText: xhr.statusText,
         headers,

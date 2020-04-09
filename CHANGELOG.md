@@ -1,5 +1,11 @@
 # ChangeLog
 
+## 0.8.3
+
+### Fix
+
+- resposeType can be setted string
+
 ## 0.8.2 
 
 ### Fix

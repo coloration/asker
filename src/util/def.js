@@ -7,7 +7,7 @@ export const defConf = {
   body: null,
   headers: {},
   postType: 'json',
-  responseType: 'object',
+  responseType: 'json',
   timeout: 0,
   // method: undefined,
   // before: null,

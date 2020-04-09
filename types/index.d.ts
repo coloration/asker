@@ -43,8 +43,8 @@ export interface AskerConf {
   /** asker will change the data type auto by this */
   postType?: 'json' | 'form-data' | 'text' | 'form-urlencoded',
   
-  /** default 'object' will call 'JSON.parse()', other return string */
-  responseType?: 'object' | 'text',
+  /** */
+  responseType?: 'arraybuffer' | 'blob' | 'document' | 'json' | 'text' | 'stream',
   
   /** waiting over timeout(MS), asker will call the 'onTimeout' or 'reject' */
   timeout?: number,
