@@ -24,40 +24,40 @@ export default {
   // components: { Upload },
   mounted() {
 
-    const canceler = new Canceler()
+    // const canceler = new Canceler()
 
-    Asker.get("http://localhost:3000/test-timeout", undefined, {
-      timeout: 3000,
-      onTimeout: (message, xhr) => {
-        console.log("error args", message, xhr);
-      },
-      canceler: canceler
-    })
-      .then(res => {
-        console.log("timeout response", res);
-      })
-      .catch(error => {
-        console.log("error", error);
-      });
+    // Asker.get("http://localhost:3000/test-timeout", undefined, {
+    //   timeout: 3000,
+    //   onTimeout: (message, xhr) => {
+    //     console.log("error args", message, xhr);
+    //   },
+    //   canceler: canceler
+    // })
+    //   .then(res => {
+    //     console.log("timeout response", res);
+    //   })
+    //   .catch(error => {
+    //     console.log("error", error);
+    //   });
 
-       Asker.get("http://localhost:3000/test-timeout", undefined, {
-      timeout: 3000,
-      onTimeout: (message, xhr) => {
-        console.log("error args", message, xhr);
-      },
-      canceler: canceler
-    })
-      .then(res => {
-        console.log("timeout response", res);
-      })
-      .catch(error => {
-        console.log("error", error);
-      });
+    //    Asker.get("http://localhost:3000/test-timeout", undefined, {
+    //   timeout: 3000,
+    //   onTimeout: (message, xhr) => {
+    //     console.log("error args", message, xhr);
+    //   },
+    //   canceler: canceler
+    // })
+    //   .then(res => {
+    //     console.log("timeout response", res);
+    //   })
+    //   .catch(error => {
+    //     console.log("error", error);
+    //   });
 
 
-    setTimeout(function () {
-      canceler.cancel()
-    }, 4000)
+    // setTimeout(function () {
+    //   canceler.cancel()
+    // }, 4000)
 
     // Asker.conf.before = (conf) => {
     //   console.log('before')
@@ -70,22 +70,22 @@ export default {
     //   return res.data
     // }
 
-    // Asker.jsonp(
-    //   'http://assistant.yingshe.com/index/taohuayun',
-    //   { a: 1 },
-    //   { jsonp: 'jsoncallback', getCache: true }
-    // )
-    // .then(data => {
-    //   console.log(data, 6666)
-    //   Asker.jsonp(
-    //     'http://assistant.yingshe.com/index/taohuayun',
-    //     { a: 1 },
-    //     { jsonp: 'jsoncallback', getCache: true }
-    //   )
-    //   .then(data => {
-    //     console.log(data, 777)
-    //   })
-    // })
+    Asker.jsonp(
+      'http://assistant.yingshe.com/index/taohuayun',
+      { a: 1 },
+      { jsonp: 'jsoncallback', getCache: true }
+    )
+    .then(data => {
+      console.log(data, 6666)
+      Asker.jsonp(
+        'http://assistant.yingshe.com/index/taohuayun',
+        { a: 1 },
+        { jsonp: 'jsoncallback', getCache: true }
+      )
+      .then(data => {
+        console.log(data, 777)
+      })
+    })
 
     // const safe = safeCall(function (e) {
     //   console.log(e)

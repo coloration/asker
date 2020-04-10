@@ -1,7 +1,7 @@
 import { forEach, isFunc, isPositive, isUnd } from '../util/func'
 import { merge, getResHeaders, createErr } from '../util/format'
 import { defRes, ABORT, ERROR, TIMEOUT } from '../util/def' 
-import { Canceler } from '../canceler'
+
 
 export default function xhrAdapter (conf) {
   return new Promise(function promiseCreator (resolve, reject) {
@@ -22,7 +22,7 @@ export default function xhrAdapter (conf) {
       if (!valid) return reject(createErr(xhr.status, xhr.responseText))
 
       const headers = getResHeaders(xhr)
-      const responseData = !conf.responseType || conf.responseType === 'text' ? request.responseText : request.response
+      const responseData = !conf.responseType || conf.responseType === 'text' ? xhr.responseText : xhr.response
       
       const res = merge({}, defRes, {
         data: responseData,
