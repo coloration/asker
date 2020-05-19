@@ -6,6 +6,7 @@ export function object2Query (obj, encode = false) {
   const result = []
 
   forEach((value, field) => {
+    value = JSON.stringify(value)
     value = encode ? encodeURIComponent(value) : value
     result.push(`${field}=${value}`)
   }, obj)
@@ -15,14 +16,14 @@ export function object2Query (obj, encode = false) {
 
 export function query2Object (query, raw = false) {
   if (!isStr(query)) return query
-  if (query[0] === '?') query = query.substr(1)
+  query = query.replace(/^.*\?/, '')
   
   return query.split('&').reduce(function (acc, curr) {
     const p = curr.split('=')
     if (p.length === 2) {
       let val = p[1]
       if (raw) {
-        try { val = JSON.parse(val) } catch (e) {}
+        try { val = JSON.parse(val) } catch (e) {/* */}
       }
       acc[p[0]] = val
     }

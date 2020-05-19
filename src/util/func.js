@@ -1,3 +1,5 @@
+import { getMethods } from './def'
+
 function toString (obj) {
   return Object.prototype.toString.call(obj)
 }
@@ -66,5 +68,5 @@ export function hasProp (o, prop) {
 }
 
 export function isGetLike (method) {
-  return ['get', 'option', 'head'].includes(method)
+  return getMethods.includes(method)
 }

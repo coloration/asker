@@ -38,3 +38,5 @@ export const ERROR = 'ASKER:REQUEST_ERROR'
 export const TIMEOUT = 'ASKER:REQUEST_TIMEOUT'
 
 
+export const getMethods = ['get', 'delete', 'head', 'options']
+export const postMethods = ['post', 'put', 'patch']

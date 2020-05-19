@@ -2,9 +2,7 @@ import Asker from './asker'
 import { Canceler } from './canceler'
 
 import { batch, jsonp, genGet, genPost } from './method' 
-
-const getMethods = ['get', 'delete', 'head', 'options']
-const postMethods = ['post', 'put', 'patch']
+import { getMethods, postMethods } from './util/def'
 
 let instance = null
 

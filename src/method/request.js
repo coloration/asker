@@ -1,4 +1,4 @@
-import { isObj, isUnd, hasProp, isGetLike } from '../util/func'
+import { isObj, isUnd, hasProp, isGetLike, isNum } from '../util/func'
 import { object2Query } from '../util/format'
 import { customAdapter, xhrAdapter } from '../adapter'
 import cache from '../cache'
@@ -17,11 +17,24 @@ export default function request (conf) {
 
   conf.uri = uri
 
-  const needCache = conf.getCache && isGetLike(conf.method)
+  const { getCache } = conf
+  const getCacheTimePeriod = isNum(getCache) && getCache > 0
+  const needCache = (getCache || getCacheTimePeriod) && isGetLike(conf.method)
   
-  if (needCache && hasProp(cache, uri)) {
-    return Promise.resolve(cache[uri])
+  if (needCache) {
+    if (hasProp(cache, uri)) {
+      console.log('f')
+      return Promise.resolve(cache[uri])
+    }
+    else if (getCacheTimePeriod) {
+      setTimeout(() => {
+        if (hasProp(cache, uri)) {
+          delete cache[uri]
+        }
+      }, getCache * 1000 + 1)
+    }
   }
+  
 
   const before = conf.beforeQueue
 

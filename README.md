@@ -28,4 +28,4 @@ Asker.get('http://api.io')
 
 ## Document
 
-[Document: http://asker.coloration.top](http://asker.coloration.top)
+[Document: http://docs.coloration.top/asker](http://docs.coloration.top/asker)

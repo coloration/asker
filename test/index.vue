@@ -7,7 +7,11 @@
 
 <script>
 // import Asker from '../src/asker.js'
-import Asker, { safeCall, splitBlob, Canceler } from "../src/index";
+import Asker, { 
+  // safeCall, 
+  // splitBlob, 
+  // Canceler 
+} from "../src/index";
 
 // import Upload from './upload.vue'
 // import {
@@ -18,11 +22,75 @@ import Asker, { safeCall, splitBlob, Canceler } from "../src/index";
 //   adapterExam5Api
 // } from './adapter'
 
-import { methodApi } from "./method";
+// import { methodApi } from "./method";
 
 export default {
   // components: { Upload },
   mounted() {
+
+    // Asker.get('/abc', { a: 12, b: 5 }, {
+    //   adapter: [1, 2, Math.random()],
+    //   getCache: true
+    // })
+    // .then(parentRes => {
+    //   console.log(parentRes.data)
+    //   Asker.get('/abc', { a: 12, b: 5 }, {
+    //     adapter: [1, 2, Math.random()],
+    //     getCache: true
+    //   })
+    //   .then(res => console.log(res.data))
+    // })
+
+
+    Asker.get('/abc', { a: 12, b: 7 }, {
+      adapter: [1, 2, Math.random()],
+      getCache: 3
+    })
+    .then(parentRes => {
+      console.log(parentRes.data)
+    })
+
+    setTimeout(() => {
+        Asker.get('/abc', { a: 12, b: 7 }, {
+        adapter: [1, 2, Math.random()],
+        getCache: 3
+      })
+      .then(res => console.log(res.data))
+    }, 1000)
+
+    setTimeout(() => {
+        Asker.get('/abc', { a: 12, b: 7 }, {
+        adapter: [1, 2, Math.random()],
+        getCache: 3
+      })
+      .then(res => console.log(res.data))
+    }, 2000)
+
+    setTimeout(() => {
+        Asker.get('/abc', { a: 12, b: 7 }, {
+        adapter: [1, 2, Math.random()],
+        getCache: 3
+      })
+      .then(res => console.log(res.data))
+    }, 2999)
+
+    setTimeout(() => {
+        Asker.get('/abc', { a: 12, b: 7 }, {
+        adapter: [1, 2, Math.random()],
+        getCache: 3
+      })
+      .then(res => console.log(res.data))
+    }, 3000)
+
+    setTimeout(() => {
+        Asker.get('/abc', { a: 12, b: 7 }, {
+        adapter: [1, 2, Math.random()],
+        getCache: 3
+      })
+      .then(res => console.log(res.data))
+    }, 3001)
+
+    
 
     // const canceler = new Canceler()
 
@@ -70,22 +138,22 @@ export default {
     //   return res.data
     // }
 
-    Asker.jsonp(
-      'http://assistant.yingshe.com/index/taohuayun',
-      { a: 1 },
-      { jsonp: 'jsoncallback', getCache: true }
-    )
-    .then(data => {
-      console.log(data, 6666)
-      Asker.jsonp(
-        'http://assistant.yingshe.com/index/taohuayun',
-        { a: 1 },
-        { jsonp: 'jsoncallback', getCache: true }
-      )
-      .then(data => {
-        console.log(data, 777)
-      })
-    })
+    // Asker.jsonp(
+    //   'http://assistant.yingshe.com/index/taohuayun',
+    //   { a: 1 },
+    //   { jsonp: 'jsoncallback', getCache: true }
+    // )
+    // .then(data => {
+    //   console.log(data, 6666)
+    //   Asker.jsonp(
+    //     'http://assistant.yingshe.com/index/taohuayun',
+    //     { a: 1 },
+    //     { jsonp: 'jsoncallback', getCache: true }
+    //   )
+    //   .then(data => {
+    //     console.log(data, 777)
+    //   })
+    // })
 
     // const safe = safeCall(function (e) {
     //   console.log(e)
@@ -123,7 +191,7 @@ export default {
     //   return conf
     // }
 
-    const log = console.log;
+    // const log = console.log;
 
     // log(safeCall)
     // log(splitBlob)

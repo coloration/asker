@@ -1,5 +1,19 @@
 # ChangeLog
 
+## 0.9.0
+
+### Fix
+
+- fix `query2Object` and `object2Query` methods' typing
+
+### Optimization
+
+- `query2Object` methods will replace any chat with empty before the first `?`.
+
+### Feature
+
+- getCache support time period. `{ getCache: true | number }`
+
 ## 0.8.3 ~ 0.8.5
 
 ### Fix

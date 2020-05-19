@@ -37,8 +37,10 @@ export interface AskerConf {
   /** request headers */
   headers?: { [key: string]: any }
 
-  /** will cache response after first (getLike) request, second will return the cache */
-  getCache?: boolean
+  /** will cache response after first (getLike) request, second will return the cache. 
+   * if spec a number. the cache will be hold on `seconds`. after it will be delete.
+   **/
+  getCache?: boolean | number
 
   /** asker will change the data type auto by this */
   postType?: 'json' | 'form-data' | 'text' | 'form-urlencoded',
@@ -98,9 +100,9 @@ export interface AskerJsonpConf extends AskerConf {
 }
 
 export interface AskerBatchConf extends AskerConf {
-  /** default number of a batch */
+  /** default number of a batch, default is params' length */
   slice?: number,
-  /** retry times when a request failed */
+  /** retry times when a request failed, default is 0 */
   retry?: number
 }
 
@@ -163,8 +165,8 @@ export default Asker
 export { Canceler }
 export function splitBlob (fileOrblob: Blob, piece: number): Blob[]
 export function safeCall (exceptionHandler: (e: any) => any): (exceptionHandler?: (e: any) => any) => any
-export function object2Query (obj: { [key: string]: any }, encode?: boolean): string
-export function query2Object<T = any> (query: string, raw: boolean): T
+export function object2Query (obj: { [key: string]: any }, encode = false): string
+export function query2Object<T = any> (query: string, raw = false): T
 
 // copy from nestjs
 export declare enum HttpStatus {

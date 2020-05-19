@@ -1,6 +1,6 @@
 {
   "name": "@coloration/asker",
-  "version": "0.8.5",
+  "version": "0.9.0",
   "description": "a simple web http request tool",
   "main": "lib/index.js",
   "directories": {
