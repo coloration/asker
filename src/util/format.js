@@ -6,7 +6,6 @@ export function object2Query (obj, encode = false) {
   const result = []
 
   forEach((value, field) => {
-    value = JSON.stringify(value)
     value = encode ? encodeURIComponent(value) : value
     result.push(`${field}=${value}`)
   }, obj)

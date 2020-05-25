@@ -1,5 +1,17 @@
 # ChangeLog
 
+## 0.9.3
+
+### Fix 
+
+- `object2Query` error decoding
+
+## 0.9.1 ~ 0.9.2
+
+### Fix
+
+- fix `batch` method responses error
+
 ## 0.9.0
 
 ### Fix
