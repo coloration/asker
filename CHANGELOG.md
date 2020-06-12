@@ -1,5 +1,12 @@
 # ChangeLog
 
+## 1.0.0 
+
+### Optimization
+
+- remove default export 
+- build with rollup for minisize 
+
 ## 0.9.3
 
 ### Fix 

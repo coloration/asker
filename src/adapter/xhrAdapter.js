@@ -71,7 +71,6 @@ export default function xhrAdapter (conf) {
 
     if (isPositive(conf.timeout)) xhr.timeout = conf.timeout
 
-    if (conf.withCredentials) xhr.withCredentials = true
 
     // 'setRequestHeader' on 'XMLHttpRequest': The object's state must be OPENED
     xhr.open(conf.method.toUpperCase(), conf.uri, true)

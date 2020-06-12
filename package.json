@@ -1,12 +1,17 @@
 {
   "name": "@coloration/asker",
-  "version": "0.9.3",
+  "version": "1.0.0",
   "description": "a simple web http request tool",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
+  "module": "src/index.js",
+  "typings": "types/index.d.ts",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "jest"
+  },
   "directories": {
     "test": "test"
   },
-  "typings": "types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git@github.com:coloration/asker.git"
@@ -14,16 +19,11 @@
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.6.2",
-    "@babel/preset-env": "^7.6.2",
-    "babel-loader": "^8.0.6",
+    "@babel/preset-env": "^7.10.2",
     "jest": "^24.9.0",
-    "webpack": "^4.30.0",
-    "webpack-cli": "^3.3.0"
-  },
-  "scripts": {
-    "build": "node_modules/.bin/webpack-cli",
-    "build:window": "node_modules/.bin/webpack-cli --config webpack.window.js",
-    "test": "jest"
+    "rollup": "^2.15.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-uglify": "^6.0.4"
   },
   "author": "Wang.Binyu",
   "license": "MIT"

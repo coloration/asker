@@ -160,8 +160,7 @@ declare class Canceler {
 }
 
 
-export default Asker
-
+export { Asker }
 export { Canceler }
 export function splitBlob (fileOrblob: Blob, piece: number): Blob[]
 export function safeCall (exceptionHandler: (e: any) => any): (exceptionHandler?: (e: any) => any) => any

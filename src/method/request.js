@@ -1,6 +1,6 @@
 import { isObj, isUnd, hasProp, isGetLike, isNum } from '../util/func'
 import { object2Query } from '../util/format'
-import { customAdapter, xhrAdapter } from '../adapter'
+import { customAdapter, xhrAdapter } from '../adapter/index'
 import cache from '../cache'
 
 export default function request (conf) {

@@ -1,7 +1,7 @@
 import Asker from './asker'
 import { Canceler } from './canceler'
 
-import { batch, jsonp, genGet, genPost } from './method' 
+import { batch, jsonp, genGet, genPost } from './method/index' 
 import { getMethods, postMethods } from './util/def'
 
 let instance = null
@@ -26,7 +26,6 @@ Asker.prototype.jsonp = jsonp
 Asker.prototype.batch = batch
 
 
-export default Asker
 export { Asker }
 export { Canceler }
 export { splitBlob, safeCall, HttpStatus } from './public'
