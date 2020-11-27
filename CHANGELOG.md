@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.0.1
+
+- fix `module: esm/index.js` in `package.json` for pack tool
+
 ## 1.0.0 
 
 ### Optimization

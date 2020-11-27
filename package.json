@@ -1,9 +1,9 @@
 {
   "name": "@coloration/asker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a simple web http request tool",
   "main": "dist/index.js",
-  "module": "src/index.js",
+  "module": "esm/index.js",
   "typings": "types/index.d.ts",
   "scripts": {
     "build": "rollup -c",
