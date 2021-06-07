@@ -75,7 +75,7 @@ export interface AskerConf {
   after?: (response: any) => any
 
   /** set default catcher */
-  catcher?: (e: any) => any
+  catcher?: (e: { status: HttpStatus, message: string, response: any }) => any
 
   /** called when xhr trigger `error` event */
   onError?: (errType: string, xhr: XMLHttpRequest, conf: AskerConf) => any,
