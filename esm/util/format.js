@@ -137,6 +137,6 @@ export function getResHeaders(xhr) {
 }
 
 
-export function createErr (status, message) {
-  return { status, message }
+export function createErr (status, response) {
+  return { status, message: response, response }
 }

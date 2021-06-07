@@ -47,6 +47,8 @@ export interface AskerConf {
   
   /** */
   responseType?: 'arraybuffer' | 'blob' | 'document' | 'json' | 'text' | 'stream',
+  /** */
+  errorResponseType?: 'json' | 'text',
   
   /** waiting over timeout(MS), asker will call the 'onTimeout' or 'reject' */
   timeout?: number,
@@ -71,6 +73,9 @@ export interface AskerConf {
   
   /** hook chain change your resopnse after the request */
   after?: (response: any) => any
+
+  /** set default catcher */
+  catcher?: (e: any) => any
 
   /** called when xhr trigger `error` event */
   onError?: (errType: string, xhr: XMLHttpRequest, conf: AskerConf) => any,

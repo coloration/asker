@@ -23,7 +23,6 @@ export default function request (conf) {
   
   if (needCache) {
     if (hasProp(cache, uri)) {
-      console.log('f')
       return Promise.resolve(cache[uri])
     }
     else if (getCacheTimePeriod) {
@@ -37,6 +36,7 @@ export default function request (conf) {
   
 
   const before = conf.beforeQueue
+  const catcher = conf.catcher || (e => Promise.reject(e))
 
   const _conf = before.reduce(function (formatConf, transfer) {
     return transfer(formatConf)
@@ -57,4 +57,5 @@ export default function request (conf) {
 
     return response
   })
+  .catch(catcher)
 }

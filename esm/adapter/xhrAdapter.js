@@ -19,7 +19,15 @@ export default function xhrAdapter (conf) {
         conf.validator(xhr.status) :
         xhr.status >= 200 && xhr.status < 300
       
-      if (!valid) return reject(createErr(xhr.status, xhr.responseText))
+      if (!valid) return reject(createErr(
+        xhr.status, 
+        xhr.responseText, 
+        !conf.errorResponseType || conf.errorResponseType === 'text'
+          ? xhr.responseText
+          : conf.errorResponseType === 'json'
+            ? JSON.parse(xhr.responseText)
+            : xhr.response
+      ))
 
       const headers = getResHeaders(xhr)
       const responseData = !conf.responseType || conf.responseType === 'text' 

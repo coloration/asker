@@ -8,6 +8,7 @@ export const defConf = {
   headers: {},
   postType: 'json',
   responseType: 'json',
+  errorResposeType: 'text',
   timeout: 0,
   // method: undefined,
   // before: null,

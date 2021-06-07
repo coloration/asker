@@ -1,5 +1,10 @@
 # ChangeLog
 
+## 1.1.0
+
+- new feature `conf.catcher`. now we can set a unified function to handle error.
+- new feature `conf.errorResponseType`(default: 'text'). an interface to change error response. new field `response` is added in `{ response: Foo, status: 401, message: 'a string' }`
+
 ## 1.0.1
 
 - fix `module: esm/index.js` in `package.json` for pack tool
