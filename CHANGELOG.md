@@ -1,5 +1,13 @@
 # ChangeLog
 
+## 1.1.2
+
+- update http status code
+
+## 1.1.1
+
+- fix build
+
 ## 1.1.0
 
 - new feature `conf.catcher`. now we can set a unified function to handle error.

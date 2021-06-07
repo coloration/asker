@@ -1,6 +1,6 @@
 {
   "name": "@coloration/asker",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "a simple web http request tool",
   "main": "dist/index.js",
   "module": "esm/index.js",

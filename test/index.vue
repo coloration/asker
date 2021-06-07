@@ -7,11 +7,12 @@
 
 <script>
 // import Asker from '../src/asker.js'
-import Asker, { 
+import {
+  Asker 
   // safeCall, 
   // splitBlob, 
   // Canceler 
-} from "../src/index";
+} from "../esm/index";
 
 // import Upload from './upload.vue'
 // import {
@@ -28,6 +29,25 @@ export default {
   // components: { Upload },
   mounted() {
 
+    // const ask = new Asker({
+    //   errorResponseType: 'json',
+    //   adapter: (conf) => {
+    //     console.log('222', conf)
+    //     const responseText = '{\n  \"code\": 401, \n  \"message\": \"Signature has expired\"\n}\n'
+        
+    //     const errorResponse = !conf.errorResponseType || conf.errorResponseType === 'text'
+    //       ? responseText
+    //       : conf.errorResponseType === 'json'
+    //         ? JSON.parse(responseText)
+    //         : 666
+    //     return Promise.reject({ status: 401, message: responseText, response: errorResponse })
+        
+    //   }
+    // })
+
+    // ask.get('/abc')
+
+
     // Asker.get('/abc', { a: 12, b: 5 }, {
     //   adapter: [1, 2, Math.random()],
     //   getCache: true
@@ -42,53 +62,53 @@ export default {
     // })
 
 
-    Asker.get('/abc', { a: 12, b: 7 }, {
-      adapter: [1, 2, Math.random()],
-      getCache: 3
-    })
-    .then(parentRes => {
-      console.log(parentRes.data)
-    })
+    // Asker.get('/abc', { a: 12, b: 7 }, {
+    //   adapter: [1, 2, Math.random()],
+    //   getCache: 3
+    // })
+    // .then(parentRes => {
+    //   console.log(parentRes.data)
+    // })
 
-    setTimeout(() => {
-        Asker.get('/abc', { a: 12, b: 7 }, {
-        adapter: [1, 2, Math.random()],
-        getCache: 3
-      })
-      .then(res => console.log(res.data))
-    }, 1000)
+    // setTimeout(() => {
+    //     Asker.get('/abc', { a: 12, b: 7 }, {
+    //     adapter: [1, 2, Math.random()],
+    //     getCache: 3
+    //   })
+    //   .then(res => console.log(res.data))
+    // }, 1000)
 
-    setTimeout(() => {
-        Asker.get('/abc', { a: 12, b: 7 }, {
-        adapter: [1, 2, Math.random()],
-        getCache: 3
-      })
-      .then(res => console.log(res.data))
-    }, 2000)
+    // setTimeout(() => {
+    //     Asker.get('/abc', { a: 12, b: 7 }, {
+    //     adapter: [1, 2, Math.random()],
+    //     getCache: 3
+    //   })
+    //   .then(res => console.log(res.data))
+    // }, 2000)
 
-    setTimeout(() => {
-        Asker.get('/abc', { a: 12, b: 7 }, {
-        adapter: [1, 2, Math.random()],
-        getCache: 3
-      })
-      .then(res => console.log(res.data))
-    }, 2999)
+    // setTimeout(() => {
+    //     Asker.get('/abc', { a: 12, b: 7 }, {
+    //     adapter: [1, 2, Math.random()],
+    //     getCache: 3
+    //   })
+    //   .then(res => console.log(res.data))
+    // }, 2999)
 
-    setTimeout(() => {
-        Asker.get('/abc', { a: 12, b: 7 }, {
-        adapter: [1, 2, Math.random()],
-        getCache: 3
-      })
-      .then(res => console.log(res.data))
-    }, 3000)
+    // setTimeout(() => {
+    //     Asker.get('/abc', { a: 12, b: 7 }, {
+    //     adapter: [1, 2, Math.random()],
+    //     getCache: 3
+    //   })
+    //   .then(res => console.log(res.data))
+    // }, 3000)
 
-    setTimeout(() => {
-        Asker.get('/abc', { a: 12, b: 7 }, {
-        adapter: [1, 2, Math.random()],
-        getCache: 3
-      })
-      .then(res => console.log(res.data))
-    }, 3001)
+    // setTimeout(() => {
+    //     Asker.get('/abc', { a: 12, b: 7 }, {
+    //     adapter: [1, 2, Math.random()],
+    //     getCache: 3
+    //   })
+    //   .then(res => console.log(res.data))
+    // }, 3001)
 
     
 

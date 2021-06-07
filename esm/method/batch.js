@@ -56,7 +56,7 @@ export default function batch (url, params, conf) {
 
 
   return new Promise(function promiseCreator (resolve, reject) {
-    Promise.all(firstBatch.map((param, i) => rec(url, param, conf, remain)))
+    Promise.all(firstBatch.map((param) => rec(url, param, conf, remain)))
     .then(function allSuccess () {
       resolve(responses)
     })
