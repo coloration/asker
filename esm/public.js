@@ -98,7 +98,7 @@ export const HttpStatus = {
   misdirectedRequest: 421,
   unprocessableEntity: 422,
   locked: 423,
-  unprocessableEntity: 424,
+  failedDependency: 424,
   tooEarly: 425,
   upgradeRequired: 426,
   preconditionRequired: 428,
