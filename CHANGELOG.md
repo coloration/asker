@@ -1,5 +1,10 @@
 # ChangeLog
 
+## 1.1.3
+
+- fix duplicate http status code
+- add catcher function error type
+
 ## 1.1.2
 
 - update http status code
