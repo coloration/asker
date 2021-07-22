@@ -36,6 +36,10 @@ export function isStr (any) {
   return typeof any === 'string'
 }
 
+export function identity (any) {
+  return any
+}
+
 export function forEach (fn, object) {
     
     // null or undefined

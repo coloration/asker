@@ -1,6 +1,6 @@
 import { isObj, isUnd, hasProp, isGetLike, isNum } from '../util/func'
 import { object2Query } from '../util/format'
-import { customAdapter, xhrAdapter } from '../adapter/index'
+import { customAdapter, xhrAdapter, httpAdapter } from '../adapter/index'
 import cache from '../cache'
 
 export default function request (conf) {
@@ -41,8 +41,13 @@ export default function request (conf) {
   const _conf = before.reduce(function (formatConf, transfer) {
     return transfer(formatConf)
   }, conf)
-
-  const adapter = isUnd(_conf.adapter) ? xhrAdapter: customAdapter
+  const adapter = !isUnd(_conf.adapter) 
+    ? customAdapter
+    : !isUnd(globalThis.XMLHttpRequest)
+      ? xhrAdapter
+      : !isUnd(globalThis.process)
+        ? httpAdapter
+        : customAdapter
 
   return adapter(_conf).then(function (res) {
     const after = _conf.afterQueue
