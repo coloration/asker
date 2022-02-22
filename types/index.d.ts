@@ -14,8 +14,12 @@ export type AskerResponse<T = any> = {
   request: any
 }
 
+export type AskerAdapter = string | number | boolean | { [key: string]: any } | any[] |
+(<T = any>(conf: AskerAdapterConf, defaultResponse: AskerResponse) => Promise<T>)
+
 
 export interface AskerConf {
+
   /** a sub url, it will be added after `baseUrl` at last */
   url?: string,
   
@@ -63,10 +67,7 @@ export interface AskerConf {
    * it also can be used in mock, you can pass a data (except `undefined`), it will return a response 
    * wrapped by `AskerResponse` object. Or you pass a function return a custom data
   */
-  adapter?: string | number | boolean | { [key: string]: any } | any[] |
-    ((response: any, defaultResponse: AskerResponse) => Promise<any>) | 
-    (<T>(response: T, defaultResponse: AskerResponse) => Promise<T>)
-  ,
+  adapter?: AskerAdapter,
   
   /** hook chain change the `AskerConf` before the request  */
   before?: (conf: AskerConf) => AskerConf | ((conf: AskerConf) => AskerConf)[],
@@ -109,6 +110,10 @@ export interface AskerBatchConf extends AskerConf {
   slice?: number,
   /** retry times when a request failed, default is 0 */
   retry?: number
+}
+
+export interface AskerAdapterConf extends AskerConf {
+  uri: string
 }
 
 declare class Asker {
@@ -169,8 +174,8 @@ export { Asker }
 export { Canceler }
 export function splitBlob (fileOrblob: Blob, piece: number): Blob[]
 export function safeCall (exceptionHandler: (e: any) => any): (exceptionHandler?: (e: any) => any) => any
-export function object2Query (obj: { [key: string]: any }, encode = false): string
-export function query2Object<T = any> (query: string, raw = false): T
+export function object2Query (obj: { [key: string]: any }, encode?: boolean): string
+export function query2Object<T = any> (query: string, raw?: boolean): T
 
 /** 
  * copy from wikipedia 

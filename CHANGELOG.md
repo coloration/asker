@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.1.4
+
+- fix typing file
+
 ## 1.1.3
 
 - fix duplicate http status code
