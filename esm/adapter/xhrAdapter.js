@@ -4,8 +4,8 @@ import { defRes, ABORT, ERROR, TIMEOUT } from '../util/def'
 
 
 export default function xhrAdapter (conf) {
-  return new Promise(function promiseCreator (resolve, reject) {
-    let xhr = new XMLHttpRequest()
+  return new Promise(function xhrPromiseCreator (resolve, reject) {
+    let xhr = new globalThis.XMLHttpRequest()
 
     function clear () {
       xhr = null

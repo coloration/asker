@@ -14,7 +14,7 @@ a simple RESTful request tool for client
 <script src="https://raw.githubusercontent.com/coloration/asker/master/dist/index.js"></script>
 <script>
 var Asker = asker.Asker
-Asker.get('http://api.io`')
+Asker.get('https://jsonplaceholder.typicode.com/users/1')
 </script>
 ```
 
@@ -29,9 +29,9 @@ $ npm i @coloration/asker -S
 ```js
 import { Asker } from '@coloration/asker'
 
-Asker.get('http://api.io')
+Asker.get('https://jsonplaceholder.typicode.com/users/1')
 ```
 
 ## Document
 
-[Document: http://docs.coloration.top/asker](http://docs.coloration.top/asker)
+[Document: https://coloration.github.io](https://coloration.github.io/#/asker)
