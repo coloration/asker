@@ -137,6 +137,13 @@ export function getResHeaders(xhr) {
 }
 
 
-export function createErr (status, message, response) {
-  return { status, message, response }
+export function createErr (status, message, response, config) {
+  return { status, message, response, config }
+}
+
+export function stripBOM(content) {
+  if (content.charCodeAt(0) === 0xFEFF) {
+    content = content.slice(1)
+  }
+  return content
 }

@@ -58,7 +58,43 @@ export interface AskerConf {
   timeout?: number,
 
   /** set `XMLHTTPRequest` withCredentials */
-  withCredentials?: true,
+  withCredentials?: boolean,
+
+  /** server only */
+  httpsAgent?: any,
+
+  /** server only */
+  httpAgent?: any,
+  
+  /** server only */
+  socketPath?: string | null,
+  
+  /** server only */
+  transport?: any,
+  
+  /** server only */
+  maxRedirects?: number,
+  
+  /** server only */
+  beforeRedirect?: (options: Record<string, any>, responseDetails: {headers: Record<string, string>}) => void,
+
+  /** server only */
+  maxBodyLength?: number,
+
+  /** server only */
+  insecureHTTPParser?: boolean,
+  
+  /** server only */
+  decompress?: boolean,
+
+  /** server only */
+  maxContentLength?: number,
+
+  /** server only */
+  responseEncoding?: ResponseEncoding,
+
+  /** server only */
+  transitional?: any,
 
   /** custom validator, default is `status >= 200 && status < 300` */
   validator?: (status: number) => boolean,
@@ -99,6 +135,20 @@ export interface AskerConf {
   /** other custom props */
   [key: string]: any
 }
+
+export type ResponseEncoding =
+  | 'ascii' | 'ASCII'
+  | 'ansi' | 'ANSI'
+  | 'binary' | 'BINARY'
+  | 'base64' | 'BASE64'
+  | 'base64url' | 'BASE64URL'
+  | 'hex' | 'HEX'
+  | 'latin1' | 'LATIN1'
+  | 'ucs-2' | 'UCS-2'
+  | 'ucs2' | 'UCS2'
+  | 'utf-8' | 'UTF-8'
+  | 'utf8' | 'UTF8'
+  | 'utf16le' | 'UTF16LE'
 
 export interface AskerJsonpConf extends AskerConf {
   /** *required, JSONP callback field  */

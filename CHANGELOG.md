@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.2.0
+
+- feature: support nodejs
+
 ## 1.1.4
 
 - fix typing file

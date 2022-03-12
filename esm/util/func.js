@@ -36,6 +36,18 @@ export function isStr (any) {
   return typeof any === 'string'
 }
 
+export function isStream(val) {
+  return isObj(val) && isFunc(val.pipe)
+}
+
+export function isArrayBuffer(val) {
+  return toString(val) === '[object ArrayBuffer]'
+}
+
+export function isHttpsProtocol (val) {
+  return /https:?/.test(val)
+}
+
 export function identity (any) {
   return any
 }

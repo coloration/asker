@@ -21,13 +21,15 @@ Asker.get('https://jsonplaceholder.typicode.com/users/1')
 or
 
 ``` bash
-$ yarn add @coloration/asker -S
 $ npm i @coloration/asker -S
 ```
 
 
 ```js
+// es6
 import { Asker } from '@coloration/asker'
+// node.js
+const { Asker } = require('@coloration/asker')
 
 Asker.get('https://jsonplaceholder.typicode.com/users/1')
 ```
