@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.2.1
+
+- fix constant variable bug
+
 ## 1.2.0
 
 - feature: support nodejs

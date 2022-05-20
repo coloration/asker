@@ -56,7 +56,7 @@ export default function httpAdapter (conf) {
       reqHeaders['User-Agent'] = 'coloration-asker'
     }
 
-    const data = conf.body
+    let data = conf.body
 
     if (data && !isStream(data)) {
       if (Buffer.isBuffer(data)) {
@@ -104,14 +104,14 @@ export default function httpAdapter (conf) {
       options.port = parsedUrl.port
     }
 
-    const proxy = conf.proxy
+    let proxy = conf.proxy
     if (!proxy && proxy !== false) {
       const proxyEnv = protocol.slice(0, -1) + '_proxy';
       const proxyUrl = process.env[proxyEnv] || process.env[proxyEnv.toUpperCase()]
       if (proxyUrl) {
         const parsedProxyUrl = url.parse(proxyUrl)
         const noProxyEnv = process.env.no_proxy || process.env.NO_PROXY
-        const shouldProxy = true
+        let shouldProxy = true
 
         if (noProxyEnv) {
           const noProxy = noProxyEnv.split(',').map(function trim(s) {
